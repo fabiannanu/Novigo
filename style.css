@@ -244,14 +244,8 @@ ul { list-style: none; }
 .logo__mark {
   width: 36px;
   height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--grad);
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 900;
-  color: #fff;
+  flex-shrink: 0;
+  display: block;
 }
 
 .logo__name { color: var(--text-1); }
