@@ -15,22 +15,47 @@ window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
 /* ─── MOBILE MENU ─── */
-const hamburger = document.getElementById('hamburger');
-const navLinks  = document.getElementById('navLinks');
+const hamburger   = document.getElementById('hamburger');
+const navLinks    = document.getElementById('navLinks');
+const navBackdrop = document.getElementById('navBackdrop');
+
+function closeMobileNav() {
+  hamburger.classList.remove('open');
+  navLinks.classList.remove('open');
+  if (navBackdrop) navBackdrop.classList.remove('open');
+  document.body.style.overflow = '';
+  hamburger.setAttribute('aria-expanded', 'false');
+}
 
 hamburger.addEventListener('click', () => {
   const isOpen = hamburger.classList.toggle('open');
   navLinks.classList.toggle('open', isOpen);
+  if (navBackdrop) navBackdrop.classList.toggle('open', isOpen);
   document.body.style.overflow = isOpen ? 'hidden' : '';
   hamburger.setAttribute('aria-expanded', isOpen);
 });
 
-// Close menu when a nav link is clicked
+if (navBackdrop) {
+  navBackdrop.addEventListener('click', closeMobileNav);
+}
+
+// Close menu then smooth-scroll to target
 navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    navLinks.classList.remove('open');
-    document.body.style.overflow = '';
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href');
+    const target = href && href !== '#' ? document.querySelector(href) : null;
+
+    closeMobileNav();
+
+    if (target) {
+      e.preventDefault();
+      // wait for menu close transition (0.3s) then scroll
+      setTimeout(() => {
+        const navH = navbar ? navbar.offsetHeight : 0;
+        const top  = target.getBoundingClientRect().top + window.scrollY - navH - 16;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }, 320);
+    }
   });
 });
 
