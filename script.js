@@ -212,24 +212,27 @@ const cookieBanner  = document.getElementById('cookieBanner');
 const cookieAccept  = document.getElementById('cookieAccept');
 const cookieDecline = document.getElementById('cookieDecline');
 
-const COOKIE_KEY = 'novigo_cookie_consent';
+const COOKIE_KEY     = 'novigo_cookie_consent';
+const COOKIE_VERSION = 'v2'; // bump this to re-show banner after updates
 
 function hideCookieBanner() {
   cookieBanner.classList.remove('visible');
   setTimeout(() => { cookieBanner.style.display = 'none'; }, 400);
 }
 
-if (!localStorage.getItem(COOKIE_KEY)) {
-  setTimeout(() => cookieBanner.classList.add('visible'), 2000);
+// Show banner if never answered OR answered on an older version
+const stored = localStorage.getItem(COOKIE_KEY);
+if (!stored || !stored.endsWith('_' + COOKIE_VERSION)) {
+  setTimeout(() => cookieBanner.classList.add('visible'), 800);
 }
 
 cookieAccept.addEventListener('click', () => {
-  localStorage.setItem(COOKIE_KEY, 'accepted');
+  localStorage.setItem(COOKIE_KEY, 'accepted_' + COOKIE_VERSION);
   hideCookieBanner();
 });
 
 cookieDecline.addEventListener('click', () => {
-  localStorage.setItem(COOKIE_KEY, 'declined');
+  localStorage.setItem(COOKIE_KEY, 'declined_' + COOKIE_VERSION);
   hideCookieBanner();
 });
 
