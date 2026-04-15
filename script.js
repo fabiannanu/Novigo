@@ -111,29 +111,7 @@ filterBtns.forEach(btn => {
   });
 });
 
-/* ─── PRICING TOGGLE ─── */
-const pricingToggle  = document.getElementById('pricingToggle');
-const priceAmounts   = document.querySelectorAll('.price__amount');
-const pricePeriods   = document.querySelectorAll('.price__period');
-
-pricingToggle.addEventListener('change', () => {
-  const isMonthly = pricingToggle.checked;
-
-  priceAmounts.forEach(el => {
-    el.style.transition = 'opacity 0.2s ease';
-    el.style.opacity = '0';
-    setTimeout(() => {
-      el.textContent = isMonthly ? el.dataset.monthly : el.dataset.onetime;
-      el.style.opacity = '1';
-    }, 200);
-  });
-
-  pricePeriods.forEach(el => {
-    setTimeout(() => {
-      el.textContent = isMonthly ? el.dataset.monthly : el.dataset.onetime;
-    }, 200);
-  });
-});
+/* ─── PRICING TOGGLE (removed — only one-time pricing) ─── */
 
 /* ─── FAQ ACCORDION ─── */
 const faqItems = document.querySelectorAll('.faq-item');
@@ -195,12 +173,26 @@ if (contactForm) {
       return;
     }
 
-    // Simulate submission
+    // Build mailto and open email client
     btn.disabled = true;
     btnText.hidden = true;
     btnLoad.hidden = false;
 
-    await new Promise(r => setTimeout(r, 1500));
+    const nameVal    = (contactForm.querySelector('#name').value || '').trim();
+    const emailVal   = (contactForm.querySelector('#email').value || '').trim();
+    const phoneVal   = (contactForm.querySelector('#phone').value || '').trim();
+    const businessVal= (contactForm.querySelector('#business').value || '').trim();
+    const serviceVal = (contactForm.querySelector('#service').value || '').trim();
+    const messageVal = (contactForm.querySelector('#message').value || '').trim();
+
+    const subject = encodeURIComponent(`Cerere website — ${nameVal}`);
+    const body = encodeURIComponent(
+      `Nume: ${nameVal}\nEmail: ${emailVal}\nTelefon: ${phoneVal}\nTip afacere: ${businessVal}\nServiciu dorit: ${serviceVal}\n\nMesaj:\n${messageVal}`
+    );
+
+    window.location.href = `mailto:alexandrunanu23@gmail.com?subject=${subject}&body=${body}`;
+
+    await new Promise(r => setTimeout(r, 800));
 
     contactForm.hidden    = true;
     formSuccess.hidden    = false;

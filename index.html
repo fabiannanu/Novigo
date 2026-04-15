@@ -34,12 +34,16 @@
   </header>
 
   <!-- ─── HERO ─── -->
-  <section class="hero" id="hero">
-    <div class="hero__bg">
-      <div class="hero__grid"></div>
-      <div class="hero__glow hero__glow--1"></div>
-      <div class="hero__glow hero__glow--2"></div>
-    </div>
+  <section class="hero hero--video" id="hero">
+    <!-- Video background -->
+    <video class="hero__video" autoplay loop muted playsinline
+      poster="https://images.unsplash.com/photo-1647356191320-d7a1f80ca777?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGRhcmslMjB0ZWNobm9sb2d5JTIwbmV1cmFsJTIwbmV0d29ya3xlbnwxfHx8fDE3Njg5NzIyNTV8MA&ixlib=rb-4.1.0&q=80&w=1080">
+      <source src="https://stream.mux.com/T6oQJQ02cQ6N01TR6iHwZkKFkbepS34dkkIc9iukgy400g.m3u8" type="application/vnd.apple.mpegurl" />
+    </video>
+    <!-- Overlays -->
+    <div class="hero__video-overlay"></div>
+    <div class="hero__grad hero__grad--tl"></div>
+    <div class="hero__grad hero__grad--br"></div>
     <div class="container hero__content">
       <div class="hero__badge reveal">
         <span class="badge__dot"></span>
@@ -125,7 +129,7 @@
             <li>Design personalizat 100%</li>
             <li>Optimizat pentru mobil</li>
             <li>Rapid — sub 2 secunde</li>
-            <li>SEO local inclus</li>
+            <li>Livrare în 1–2 săptămâni</li>
           </ul>
         </div>
         <div class="service-card service-card--featured reveal" data-delay="100">
@@ -134,12 +138,12 @@
             <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2.5"/><path d="M24 12v12l8 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M8 24h4M36 24h4M24 8v4M24 36v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
           </div>
           <h3>Website + Marketing</h3>
-          <p>Pachetul complet: site premium plus strategie de atragere a clienților locali prin Google și social media.</p>
+          <p>Pachetul complet: site premium plus strategie de creștere a vizibilității și atragere a clienților locali.</p>
           <ul class="service-card__list">
             <li>Tot ce include Basic</li>
             <li>Google My Business setup</li>
-            <li>Campanie SEO 3 luni</li>
             <li>Analytics & rapoarte lunare</li>
+            <li>Livrare în 1–2 săptămâni</li>
           </ul>
         </div>
         <div class="service-card reveal" data-delay="200">
@@ -165,7 +169,7 @@
             <li>Analiză site existent</li>
             <li>Design modern actualizat</li>
             <li>Migrare conținut</li>
-            <li>Păstrare poziții SEO</li>
+            <li>Livrare în 1–2 săptămâni</li>
           </ul>
         </div>
         <div class="service-card reveal" data-delay="100">
@@ -301,7 +305,7 @@
           <div class="process-step__content">
             <h3>Descoperire & Strategie</h3>
             <p>Înțelegem afacerea ta, publicul țintă și obiectivele. Stabilim împreună ce trebuie să facă site-ul pentru tine.</p>
-            <span class="process-step__time">2–3 zile</span>
+            <span class="process-step__time">1–2 zile</span>
           </div>
         </div>
         <div class="process-step reveal" data-delay="150">
@@ -309,7 +313,7 @@
           <div class="process-step__content">
             <h3>Design & Prototip</h3>
             <p>Creăm un design personalizat care reflectă identitatea brandului tău. Tu aprobi fiecare detaliu înainte să scriem cod.</p>
-            <span class="process-step__time">5–7 zile</span>
+            <span class="process-step__time">3–5 zile</span>
           </div>
         </div>
         <div class="process-step reveal" data-delay="300">
@@ -317,7 +321,7 @@
           <div class="process-step__content">
             <h3>Dezvoltare & Testare</h3>
             <p>Construim site-ul rapid, optimizat și securizat. Testăm pe toate dispozitivele și browserele înainte de lansare.</p>
-            <span class="process-step__time">7–14 zile</span>
+            <span class="process-step__time">4–7 zile</span>
           </div>
         </div>
         <div class="process-step reveal" data-delay="450">
@@ -403,14 +407,6 @@
         <h2 class="section__title">Prețuri transparente,<br /><span class="gradient-text">fără surprize</span></h2>
         <p class="section__sub">Alege pachetul potrivit pentru afacerea ta. Fiecare include tot ce ai nevoie.</p>
       </div>
-      <div class="pricing__toggle reveal">
-        <span class="pricing__toggle-label">Plată unică</span>
-        <label class="toggle">
-          <input type="checkbox" id="pricingToggle" />
-          <span class="toggle__slider"></span>
-        </label>
-        <span class="pricing__toggle-label">Abonament lunar <span class="pricing__badge">-20%</span></span>
-      </div>
       <div class="pricing__grid">
         <div class="pricing-card reveal" data-delay="0">
           <div class="pricing-card__header">
@@ -419,17 +415,15 @@
           </div>
           <div class="pricing-card__price">
             <span class="price__currency">€</span>
-            <span class="price__amount" data-monthly="79" data-onetime="799">799</span>
-            <span class="price__period" data-monthly="/lună" data-onetime="plată unică">/odată</span>
+            <span class="price__amount">349</span>
+            <span class="price__period">plată unică</span>
           </div>
           <ul class="pricing-card__features">
             <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Website 5 pagini</li>
             <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Design personalizat</li>
             <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Optimizat mobil</li>
-            <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> SEO de bază</li>
             <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Formular contact</li>
-            <li class="pricing-card__feature--disabled"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg> Google My Business</li>
-            <li class="pricing-card__feature--disabled"><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg> Blog / Articole</li>
+            <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Livrare în 1–2 săptămâni</li>
           </ul>
           <a href="#contact" class="btn btn--outline">Solicită ofertă</a>
         </div>
@@ -441,43 +435,39 @@
           </div>
           <div class="pricing-card__price">
             <span class="price__currency">€</span>
-            <span class="price__amount" data-monthly="149" data-onetime="1499">1499</span>
-            <span class="price__period" data-monthly="/lună" data-onetime="plată unică">/odată</span>
+            <span class="price__amount">449</span>
+            <span class="price__period">plată unică</span>
           </div>
           <ul class="pricing-card__features">
             <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Website pagini nelimitate</li>
             <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Design premium personalizat</li>
-            <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> SEO avansat local</li>
             <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Google My Business</li>
             <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Blog / Articole</li>
             <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Analytics & rapoarte</li>
             <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Suport prioritar 48h</li>
+            <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Livrare în 1–2 săptămâni</li>
           </ul>
           <a href="#contact" class="btn btn--primary">Solicită ofertă</a>
         </div>
-        <div class="pricing-card reveal" data-delay="300">
+        <div class="pricing-card pricing-card--premium reveal" data-delay="300">
           <div class="pricing-card__header">
             <h3>Premium</h3>
             <p>Pentru afaceri ambițioase care vor magazin online sau funcționalități avansate.</p>
           </div>
-          <div class="pricing-card__price">
-            <span class="price__currency">€</span>
-            <span class="price__amount" data-monthly="249" data-onetime="2999">2999</span>
-            <span class="price__period" data-monthly="/lună" data-onetime="plată unică">/odată</span>
+          <div class="pricing-card__price pricing-card__price--custom">
+            <span class="price__custom-label">Preț personalizat</span>
           </div>
           <ul class="pricing-card__features">
             <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Tot ce include Business</li>
             <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Magazin online complet</li>
             <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Plăți online integrate</li>
-            <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Campanie SEO 3 luni</li>
-            <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Strategie social media</li>
             <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Manager de cont dedicat</li>
             <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Suport prioritar 24h</li>
           </ul>
-          <a href="#contact" class="btn btn--outline">Solicită ofertă</a>
+          <a href="#contact" class="btn btn--premium">Cere ofertă personalizată</a>
         </div>
       </div>
-      <p class="pricing__note reveal">Toate prețurile sunt orientative. Fiecare proiect este evaluat individual. Consultanța inițială este gratuită.</p>
+      <p class="pricing__note reveal">Plată unică, fără abonamente. Consultanța inițială este gratuită.</p>
     </div>
   </section>
 
@@ -562,7 +552,7 @@
             <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="faq-item__answer">
-            <p>În funcție de complexitate, un website de prezentare se livrează în 2–3 săptămâni, un proiect cu e-commerce în 4–6 săptămâni. Îți comunicăm un termen exact după prima discuție.</p>
+            <p>Livrăm orice website în 1–2 săptămâni de la aprobare. Îți comunicăm un termen exact după prima discuție.</p>
           </div>
         </div>
         <div class="faq-item reveal">
@@ -581,15 +571,6 @@
           </button>
           <div class="faq-item__answer">
             <p>Înainte de a scrie orice cod, îți prezentăm un prototip vizual pentru aprobare. Includem două runde de revizii gratuite. Nu trecem la dezvoltare dacă nu ești 100% mulțumit de design.</p>
-          </div>
-        </div>
-        <div class="faq-item reveal">
-          <button class="faq-item__question">
-            Ce înseamnă SEO local și de ce contează?
-            <svg class="faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-          </button>
-          <div class="faq-item__answer">
-            <p>SEO local înseamnă că site-ul tău apare atunci când cineva din orașul tău caută serviciile pe care le oferi. Dacă ești un stomatolog din Cluj, vrei să apari când cineva caută "dentist Cluj". Asta aduce clienți reali, nu trafic aleatoriu.</p>
           </div>
         </div>
         <div class="faq-item reveal">
@@ -635,22 +616,22 @@
           <h2 class="section__title">Hai să<br /><span class="gradient-text">vorbim</span></h2>
           <p class="contact__desc">Spune-ne despre afacerea ta și vom pregăti o ofertă personalizată în 24 de ore.</p>
           <div class="contact__details">
-            <a href="mailto:hello@novigo.ro" class="contact__detail">
+            <a href="mailto:alexandrunanu23@gmail.com" class="contact__detail">
               <div class="contact__detail-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               </div>
               <div>
                 <span>Email</span>
-                <strong>hello@novigo.ro</strong>
+                <strong>alexandrunanu23@gmail.com</strong>
               </div>
             </a>
-            <a href="tel:+40712345678" class="contact__detail">
+            <a href="tel:+40737886834" class="contact__detail">
               <div class="contact__detail-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
               </div>
               <div>
                 <span>Telefon</span>
-                <strong>0712 345 678</strong>
+                <strong>0737 886 834</strong>
               </div>
             </a>
             <div class="contact__detail">
@@ -659,20 +640,9 @@
               </div>
               <div>
                 <span>Locație</span>
-                <strong>Cluj-Napoca, România</strong>
+                <strong>București, România</strong>
               </div>
             </div>
-          </div>
-          <div class="contact__social">
-            <a href="#" class="social-link" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            </a>
-            <a href="#" class="social-link" aria-label="Facebook">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-            </a>
-            <a href="#" class="social-link" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            </a>
           </div>
         </div>
         <div class="contact__form-wrapper reveal">
@@ -726,6 +696,12 @@
               <span class="btn__loading" hidden>Se trimite...</span>
             </button>
             <p class="form__note">Răspundem în maxim 24 de ore în zilele lucrătoare.</p>
+            <p class="form__note" style="margin-top:8px;">
+              Sau scrie-ne direct:
+              <a href="https://wa.me/40737886834" target="_blank" rel="noopener" style="color:var(--accent-1);">WhatsApp</a>
+              ·
+              <a href="mailto:alexandrunanu23@gmail.com" style="color:var(--accent-1);">Email</a>
+            </p>
           </form>
           <div class="form__success" id="formSuccess" hidden>
             <div class="form__success-icon">
@@ -790,5 +766,36 @@
   </div>
 
   <script src="script.js"></script>
+
+  <!-- HLS.js for hero video (browsers that don't support HLS natively) -->
+  <script>
+    (function() {
+      var video = document.querySelector('.hero__video');
+      if (!video) return;
+      var src = 'https://stream.mux.com/T6oQJQ02cQ6N01TR6iHwZkKFkbepS34dkkIc9iukgy400g.m3u8';
+
+      // Safari / iOS — native HLS support
+      if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = src;
+        video.load();
+        video.play().catch(function(){});
+        return;
+      }
+
+      // Other browsers — load HLS.js from CDN
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/hls.js@1.6.15/dist/hls.min.js';
+      script.onload = function() {
+        if (!window.Hls || !Hls.isSupported()) return;
+        var hls = new Hls({ autoStartLoad: true, startLevel: -1 });
+        hls.loadSource(src);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, function() {
+          video.play().catch(function(){});
+        });
+      };
+      document.head.appendChild(script);
+    })();
+  </script>
 </body>
 </html>
