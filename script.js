@@ -267,6 +267,79 @@ const sectionObserver = new IntersectionObserver(
 
 sections.forEach(s => sectionObserver.observe(s));
 
+/* ─── HERO SCROLL BUTTON ─── */
+const heroScrollBtn = document.getElementById('heroScrollBtn');
+if (heroScrollBtn) {
+  heroScrollBtn.addEventListener('click', () => {
+    const nextSection = document.querySelector('#hero + section') || document.querySelector('section:nth-of-type(2)');
+    if (nextSection) {
+      const navH = navbar ? navbar.offsetHeight : 0;
+      const top = nextSection.getBoundingClientRect().top + window.scrollY - navH;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+}
+
+/* ─── LEGAL MODALS ─── */
+function openModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // focus trap — focus close button
+  const closeBtn = modal.querySelector('.legal-modal__close');
+  if (closeBtn) closeBtn.focus();
+}
+
+function closeModal(modal) {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Open via footer legal links
+document.querySelectorAll('.legal-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    openModal(link.dataset.modal);
+  });
+});
+
+// Open from cookie banner "Află mai mult"
+document.querySelectorAll('[data-modal]').forEach(el => {
+  if (el.classList.contains('legal-link')) return; // already handled
+  el.addEventListener('click', e => {
+    e.preventDefault();
+    openModal(el.dataset.modal);
+  });
+});
+
+// Close via × button
+document.querySelectorAll('.legal-modal__close').forEach(btn => {
+  btn.addEventListener('click', () => closeModal(btn.closest('.legal-modal')));
+});
+
+// Close via backdrop click
+document.querySelectorAll('.legal-modal__backdrop').forEach(backdrop => {
+  backdrop.addEventListener('click', () => closeModal(backdrop.closest('.legal-modal')));
+});
+
+// Close via Escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.legal-modal.open').forEach(m => closeModal(m));
+  }
+});
+
+// Inline links inside modal bodies (e.g. link to cookies from privacy)
+document.querySelectorAll('.legal-inline-link').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    // close current modal first, then open target
+    document.querySelectorAll('.legal-modal.open').forEach(m => closeModal(m));
+    openModal(btn.dataset.modal);
+  });
+});
+
 /* ─── TILT EFFECT on cards (desktop only) ─── */
 if (window.matchMedia('(hover: hover)').matches) {
   document.querySelectorAll('.service-card, .pricing-card, .testimonial-card').forEach(card => {

@@ -1751,36 +1751,45 @@ ul { list-style: none; }
 ═══════════════════════════════════ */
 .cookie-banner {
   position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%) translateY(120px);
-  z-index: 999;
-  background: var(--bg-3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 16px 20px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  background: rgba(13, 15, 30, 0.97);
+  border-top: 1px solid var(--border);
+  padding: 16px 24px;
   display: flex;
   align-items: center;
-  gap: 20px;
-  box-shadow: var(--shadow-lg);
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 -4px 32px rgba(0,0,0,0.5);
   backdrop-filter: blur(16px);
-  max-width: calc(100% - 48px);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-backdrop-filter: blur(16px);
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-wrap: wrap;
 }
 
 .cookie-banner.visible {
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 
 .cookie-banner p {
   font-size: 0.875rem;
   color: var(--text-2);
-  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
 }
 
-.cookie-banner p a {
+.cookie-banner__legal-btn {
+  background: none;
+  border: none;
+  padding: 0;
   color: var(--accent-1);
   text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+  font-size: inherit;
 }
 
 .cookie-banner__actions {
@@ -1788,6 +1797,134 @@ ul { list-style: none; }
   gap: 10px;
   flex-shrink: 0;
 }
+
+/* ═══════════════════════════════════
+   LEGAL MODALS
+═══════════════════════════════════ */
+.legal-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.legal-modal.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.legal-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.legal-modal__box {
+  position: relative;
+  z-index: 1;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 680px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+  transform: translateY(16px);
+  transition: transform 0.25s ease;
+}
+
+.legal-modal.open .legal-modal__box {
+  transform: translateY(0);
+}
+
+.legal-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.legal-modal__header h2 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-1);
+}
+
+.legal-modal__close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  font-size: 1.25rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--transition), color var(--transition);
+}
+
+.legal-modal__close:hover {
+  background: rgba(255,255,255,0.12);
+  color: var(--text-1);
+}
+
+.legal-modal__body {
+  padding: 28px;
+  overflow-y: auto;
+  line-height: 1.75;
+  color: var(--text-2);
+  font-size: 0.9375rem;
+  overscroll-behavior: contain;
+}
+
+.legal-modal__updated {
+  font-size: 0.8125rem;
+  color: var(--text-3);
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+.legal-modal__body h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-1);
+  margin: 24px 0 8px;
+}
+
+.legal-modal__body h3:first-of-type { margin-top: 0; }
+
+.legal-modal__body p { margin-bottom: 12px; }
+
+.legal-modal__body a,
+.legal-inline-link {
+  color: var(--accent-1);
+  text-decoration: underline;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.legal-modal__body strong { color: var(--text-1); }
 
 /* ═══════════════════════════════════
    RESPONSIVE
@@ -1906,12 +2043,12 @@ ul { list-style: none; }
 
   .cookie-banner {
     flex-direction: column;
-    gap: 14px;
-    text-align: center;
-    bottom: 16px;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
   }
 
-  .cookie-banner p { white-space: normal; }
+  .cookie-banner__actions { width: 100%; justify-content: flex-end; }
 }
 
 @media (max-width: 480px) {

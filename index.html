@@ -92,10 +92,10 @@
         </div>
       </div>
     </div>
-    <div class="hero__scroll">
+    <button class="hero__scroll" id="heroScrollBtn" aria-label="Scroll mai jos">
       <span>Scroll</span>
       <div class="hero__scroll-line"></div>
-    </div>
+    </button>
   </section>
 
   <!-- ─── LOGOS / SOCIAL PROOF ─── -->
@@ -765,10 +765,10 @@
         </div>
         <div class="footer__col">
           <h4>Legal</h4>
-          <a href="#">Politica de confidențialitate</a>
-          <a href="#">Termeni și condiții</a>
-          <a href="#">Politica cookies</a>
-          <a href="#">ANPC</a>
+          <a href="#" class="legal-link" data-modal="modal-confidentialitate">Politica de confidențialitate</a>
+          <a href="#" class="legal-link" data-modal="modal-termeni">Termeni și condiții</a>
+          <a href="#" class="legal-link" data-modal="modal-cookies">Politica cookies</a>
+          <a href="#" class="legal-link" data-modal="modal-anpc">ANPC</a>
         </div>
       </div>
     </div>
@@ -778,12 +778,156 @@
     </div>
   </footer>
 
-  <!-- Cookie Banner -->
-  <div class="cookie-banner" id="cookieBanner">
-    <p>Folosim cookie-uri pentru a îmbunătăți experiența ta. <a href="#">Află mai mult</a></p>
+  <!-- ─── COOKIE BANNER ─── -->
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-label="Consimțământ cookie-uri">
+    <p>Folosim cookie-uri pentru a îmbunătăți experiența ta. <button class="cookie-banner__legal-btn" data-modal="modal-cookies">Află mai mult</button></p>
     <div class="cookie-banner__actions">
       <button class="btn btn--ghost btn--sm" id="cookieDecline">Refuz</button>
       <button class="btn btn--primary btn--sm" id="cookieAccept">Accept</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       LEGAL MODALS
+  ═══════════════════════════════════════════════ -->
+
+  <!-- Politica de confidențialitate -->
+  <div class="legal-modal" id="modal-confidentialitate" role="dialog" aria-modal="true" aria-labelledby="modal-confidentialitate-title">
+    <div class="legal-modal__backdrop"></div>
+    <div class="legal-modal__box">
+      <div class="legal-modal__header">
+        <h2 id="modal-confidentialitate-title">Politica de confidențialitate</h2>
+        <button class="legal-modal__close" aria-label="Închide">&times;</button>
+      </div>
+      <div class="legal-modal__body">
+        <p class="legal-modal__updated">Ultima actualizare: aprilie 2026</p>
+
+        <h3>1. Cine suntem</h3>
+        <p>Novigo este un serviciu de creare de website-uri premium, cu sediul în București, România. Puteți lua legătura cu noi la adresa <a href="mailto:alexandrunanu23@gmail.com">alexandrunanu23@gmail.com</a> sau la numărul <a href="tel:+40737886834">0737 886 834</a>.</p>
+
+        <h3>2. Ce date colectăm</h3>
+        <p>Colectăm exclusiv datele pe care ni le furnizați voluntar prin formularul de contact: nume, adresă de email, număr de telefon și mesajul trimis. Nu colectăm date fără consimțământul dumneavoastră.</p>
+
+        <h3>3. Cum folosim datele</h3>
+        <p>Datele colectate sunt folosite exclusiv pentru a răspunde solicitărilor dumneavoastră, a pregăti oferte personalizate și a menține comunicarea legată de proiectul dumneavoastră. Nu vindem, nu închiriem și nu transferăm datele dumneavoastră către terți.</p>
+
+        <h3>4. Stocarea datelor</h3>
+        <p>Datele sunt stocate în mod securizat și păstrate pe durata necesară pentru îndeplinirea scopului pentru care au fost colectate, dar nu mai mult de 3 ani de la ultima interacțiune.</p>
+
+        <h3>5. Drepturile dumneavoastră</h3>
+        <p>În conformitate cu GDPR, aveți dreptul de acces, rectificare, ștergere, restricționare a prelucrării și portabilitate a datelor. Pentru orice solicitare, ne puteți contacta la <a href="mailto:alexandrunanu23@gmail.com">alexandrunanu23@gmail.com</a>.</p>
+
+        <h3>6. Cookie-uri</h3>
+        <p>Site-ul poate utiliza cookie-uri tehnice necesare funcționării. Consultați <button class="legal-inline-link" data-modal="modal-cookies">Politica noastră de cookies</button> pentru detalii.</p>
+
+        <h3>7. Modificări ale politicii</h3>
+        <p>Ne rezervăm dreptul de a actualiza această politică. Versiunea actualizată va fi publicată pe această pagină cu data ultimei modificări.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Termeni și condiții -->
+  <div class="legal-modal" id="modal-termeni" role="dialog" aria-modal="true" aria-labelledby="modal-termeni-title">
+    <div class="legal-modal__backdrop"></div>
+    <div class="legal-modal__box">
+      <div class="legal-modal__header">
+        <h2 id="modal-termeni-title">Termeni și condiții</h2>
+        <button class="legal-modal__close" aria-label="Închide">&times;</button>
+      </div>
+      <div class="legal-modal__body">
+        <p class="legal-modal__updated">Ultima actualizare: aprilie 2026</p>
+
+        <h3>1. Acceptarea termenilor</h3>
+        <p>Prin utilizarea serviciilor Novigo și prin plasarea unei comenzi, confirmați că ați citit, înțeles și acceptat prezentele Termeni și Condiții.</p>
+
+        <h3>2. Servicii oferite</h3>
+        <p>Novigo oferă servicii de design și dezvoltare web, incluzând website-uri de prezentare, magazine online și redesign de site-uri existente. Detaliile specifice ale fiecărui proiect sunt stabilite printr-o ofertă personalizată agreată de ambele părți.</p>
+
+        <h3>3. Prețuri și plată</h3>
+        <p>Toate prețurile afișate reprezintă tarife orientative pentru plată unică. Prețul final se stabilește în oferta personalizată. Plata se efectuează conform condițiilor agreate în ofertă (avans la semnare, rest la livrare).</p>
+
+        <h3>4. Livrare și termene</h3>
+        <p>Termenul standard de livrare este de 1–2 săptămâni de la aprobarea designului și furnizarea tuturor materialelor necesare. Termenele pot varia în funcție de complexitatea proiectului și de promptitudinea furnizării conținutului de către client.</p>
+
+        <h3>5. Revizii și aprobare</h3>
+        <p>Fiecare pachet include două runde de revizii gratuite asupra designului. Reviziile suplimentare pot fi tarifate separat, conform înțelegerii prealabile.</p>
+
+        <h3>6. Proprietate intelectuală</h3>
+        <p>La finalizarea plății integrale, drepturile de utilizare asupra produsului livrat sunt transferate integral clientului. Novigo poate utiliza proiectul finalizat ca referință în portofoliu, cu excepția cazului în care clientul solicită altfel în scris.</p>
+
+        <h3>7. Garanție</h3>
+        <p>Oferim garanție de 30 de zile pentru orice defecțiuni tehnice apărute după lansare, cauzate exclusiv de codul livrat de Novigo.</p>
+
+        <h3>8. Limitarea răspunderii</h3>
+        <p>Novigo nu este responsabil pentru pierderile indirecte sau de profit cauzate de indisponibilitatea temporară a site-ului, dacă aceasta nu se datorează direct serviciilor noastre.</p>
+
+        <h3>9. Legislație aplicabilă</h3>
+        <p>Prezentele condiții sunt guvernate de legislația română. Orice litigiu va fi soluționat pe cale amiabilă sau, în caz contrar, prin instanțele competente din București.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Politica cookies -->
+  <div class="legal-modal" id="modal-cookies" role="dialog" aria-modal="true" aria-labelledby="modal-cookies-title">
+    <div class="legal-modal__backdrop"></div>
+    <div class="legal-modal__box">
+      <div class="legal-modal__header">
+        <h2 id="modal-cookies-title">Politica cookies</h2>
+        <button class="legal-modal__close" aria-label="Închide">&times;</button>
+      </div>
+      <div class="legal-modal__body">
+        <p class="legal-modal__updated">Ultima actualizare: aprilie 2026</p>
+
+        <h3>Ce sunt cookie-urile?</h3>
+        <p>Cookie-urile sunt fișiere text de mici dimensiuni stocate în browserul dumneavoastră atunci când vizitați un site web. Ele permit site-ului să vă recunoască la o vizită ulterioară și să rețină preferințele dumneavoastră.</p>
+
+        <h3>Ce cookie-uri folosim</h3>
+        <p><strong>Cookie-uri tehnice necesare</strong> — esențiale pentru funcționarea corectă a site-ului (ex.: reținerea consimțământului cookie). Nu pot fi dezactivate fără a afecta funcționalitatea.</p>
+        <p><strong>Cookie-uri de preferințe</strong> — rețin opțiunile dumneavoastră (ex.: limba, tema). Pot fi dezactivate, dar unele funcționalități pot fi afectate.</p>
+
+        <h3>Cum controlați cookie-urile</h3>
+        <p>Puteți controla și/sau șterge cookie-urile oricând din setările browserului dumneavoastră. Consultați documentația browserului pentru instrucțiuni specifice (Chrome, Firefox, Safari, Edge).</p>
+
+        <h3>Consimțământ</h3>
+        <p>La prima vizită, vă cerem consimțământul prin bannerul de cookies afișat în partea de jos a paginii. Consimțământul dumneavoastră este stocat local și valabil 12 luni.</p>
+
+        <h3>Contact</h3>
+        <p>Pentru orice întrebare legată de utilizarea cookie-urilor, ne puteți contacta la <a href="mailto:alexandrunanu23@gmail.com">alexandrunanu23@gmail.com</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANPC -->
+  <div class="legal-modal" id="modal-anpc" role="dialog" aria-modal="true" aria-labelledby="modal-anpc-title">
+    <div class="legal-modal__backdrop"></div>
+    <div class="legal-modal__box">
+      <div class="legal-modal__header">
+        <h2 id="modal-anpc-title">ANPC — Informații consumatori</h2>
+        <button class="legal-modal__close" aria-label="Închide">&times;</button>
+      </div>
+      <div class="legal-modal__body">
+        <h3>Autoritatea Națională pentru Protecția Consumatorilor</h3>
+        <p>În conformitate cu legislația română privind protecția consumatorilor (OG 21/1992, republicată), aveți dreptul să depuneți o reclamație la ANPC dacă considerați că drepturile dumneavoastră au fost încălcate.</p>
+
+        <h3>Date de contact ANPC</h3>
+        <p>
+          <strong>Adresă:</strong> Bd. Aviatorilor nr. 72, sector 1, București<br />
+          <strong>Telefon:</strong> 021 9551<br />
+          <strong>Email:</strong> <a href="mailto:office@anpc.ro">office@anpc.ro</a><br />
+          <strong>Website:</strong> <a href="https://anpc.ro" target="_blank" rel="noopener">anpc.ro</a>
+        </p>
+
+        <h3>Soluționarea alternativă a litigiilor (SAL)</h3>
+        <p>Conform Directivei UE 2013/11/UE și Regulamentului UE 524/2013, aveți posibilitatea de a utiliza platforma europeană de soluționare online a litigiilor (SOL): <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a></p>
+
+        <h3>Date operator</h3>
+        <p>
+          <strong>Denumire:</strong> Novigo<br />
+          <strong>Locație:</strong> București, România<br />
+          <strong>Email:</strong> <a href="mailto:alexandrunanu23@gmail.com">alexandrunanu23@gmail.com</a><br />
+          <strong>Telefon:</strong> <a href="tel:+40737886834">0737 886 834</a>
+        </p>
+      </div>
     </div>
   </div>
 
