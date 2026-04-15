@@ -1,0 +1,296 @@
+/* ═══════════════════════════════════════════════
+   NOVIGO — Main JavaScript
+═══════════════════════════════════════════════ */
+
+'use strict';
+
+/* ─── NAVBAR scroll behaviour ─── */
+const navbar = document.getElementById('navbar');
+
+function onScroll() {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+/* ─── MOBILE MENU ─── */
+const hamburger = document.getElementById('hamburger');
+const navLinks  = document.getElementById('navLinks');
+
+hamburger.addEventListener('click', () => {
+  const isOpen = hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+  hamburger.setAttribute('aria-expanded', isOpen);
+});
+
+// Close menu when a nav link is clicked
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+/* ─── REVEAL ON SCROLL ─── */
+const revealObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+);
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ─── ANIMATED COUNTERS ─── */
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target, 10);
+  const duration = 1800;
+  const start    = performance.now();
+
+  function step(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    // Ease-out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(eased * target);
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = target;
+  }
+
+  requestAnimationFrame(step);
+}
+
+const counterObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.5 }
+);
+
+document.querySelectorAll('.stat__number[data-target]').forEach(el => counterObserver.observe(el));
+
+/* ─── PORTFOLIO FILTERS ─── */
+const filterBtns      = document.querySelectorAll('.filter-btn');
+const portfolioItems  = document.querySelectorAll('.portfolio-item');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('filter-btn--active'));
+    btn.classList.add('filter-btn--active');
+
+    const filter = btn.dataset.filter;
+
+    portfolioItems.forEach(item => {
+      const show = filter === 'all' || item.dataset.category === filter;
+      item.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+
+      if (show) {
+        item.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          item.style.opacity = '1';
+          item.style.transform = '';
+        });
+      } else {
+        item.style.opacity = '0';
+        item.style.transform = 'scale(0.95)';
+        setTimeout(() => item.classList.add('hidden'), 300);
+      }
+    });
+  });
+});
+
+/* ─── PRICING TOGGLE ─── */
+const pricingToggle  = document.getElementById('pricingToggle');
+const priceAmounts   = document.querySelectorAll('.price__amount');
+const pricePeriods   = document.querySelectorAll('.price__period');
+
+pricingToggle.addEventListener('change', () => {
+  const isMonthly = pricingToggle.checked;
+
+  priceAmounts.forEach(el => {
+    el.style.transition = 'opacity 0.2s ease';
+    el.style.opacity = '0';
+    setTimeout(() => {
+      el.textContent = isMonthly ? el.dataset.monthly : el.dataset.onetime;
+      el.style.opacity = '1';
+    }, 200);
+  });
+
+  pricePeriods.forEach(el => {
+    setTimeout(() => {
+      el.textContent = isMonthly ? el.dataset.monthly : el.dataset.onetime;
+    }, 200);
+  });
+});
+
+/* ─── FAQ ACCORDION ─── */
+const faqItems = document.querySelectorAll('.faq-item');
+
+faqItems.forEach(item => {
+  const question = item.querySelector('.faq-item__question');
+  const answer   = item.querySelector('.faq-item__answer');
+  const inner    = answer.querySelector('p');
+
+  question.addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+
+    // Close all
+    faqItems.forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-item__answer').style.height = '0';
+    });
+
+    // Toggle clicked
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.height = inner.offsetHeight + 'px';
+    }
+  });
+
+  // Accessibility
+  question.setAttribute('aria-expanded', 'false');
+  item.addEventListener('transitionend', () => {
+    question.setAttribute('aria-expanded', item.classList.contains('open'));
+  });
+});
+
+/* ─── CONTACT FORM ─── */
+const contactForm = document.getElementById('contactForm');
+const formSuccess = document.getElementById('formSuccess');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const btn     = contactForm.querySelector('.btn');
+    const btnText = btn.querySelector('.btn__text');
+    const btnLoad = btn.querySelector('.btn__loading');
+
+    // Basic validation
+    const required = contactForm.querySelectorAll('[required]');
+    let valid = true;
+
+    required.forEach(field => {
+      field.style.borderColor = '';
+      if (!field.value.trim()) {
+        field.style.borderColor = '#f87171';
+        valid = false;
+      }
+    });
+
+    if (!valid) {
+      contactForm.querySelector('[required]').focus();
+      return;
+    }
+
+    // Simulate submission
+    btn.disabled = true;
+    btnText.hidden = true;
+    btnLoad.hidden = false;
+
+    await new Promise(r => setTimeout(r, 1500));
+
+    contactForm.hidden    = true;
+    formSuccess.hidden    = false;
+    formSuccess.style.display = 'block';
+  });
+
+  // Live validation reset
+  contactForm.querySelectorAll('input, textarea').forEach(field => {
+    field.addEventListener('input', () => {
+      field.style.borderColor = '';
+    });
+  });
+}
+
+/* ─── COOKIE BANNER ─── */
+const cookieBanner  = document.getElementById('cookieBanner');
+const cookieAccept  = document.getElementById('cookieAccept');
+const cookieDecline = document.getElementById('cookieDecline');
+
+const COOKIE_KEY = 'novigo_cookie_consent';
+
+function hideCookieBanner() {
+  cookieBanner.classList.remove('visible');
+  setTimeout(() => { cookieBanner.style.display = 'none'; }, 400);
+}
+
+if (!localStorage.getItem(COOKIE_KEY)) {
+  setTimeout(() => cookieBanner.classList.add('visible'), 2000);
+}
+
+cookieAccept.addEventListener('click', () => {
+  localStorage.setItem(COOKIE_KEY, 'accepted');
+  hideCookieBanner();
+});
+
+cookieDecline.addEventListener('click', () => {
+  localStorage.setItem(COOKIE_KEY, 'declined');
+  hideCookieBanner();
+});
+
+/* ─── SMOOTH ANCHOR SCROLL ─── */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', e => {
+    const id = anchor.getAttribute('href');
+    if (id === '#') return;
+    const target = document.querySelector(id);
+    if (!target) return;
+    e.preventDefault();
+    const navH = navbar.offsetHeight;
+    const top  = target.getBoundingClientRect().top + window.scrollY - navH - 16;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+});
+
+/* ─── ACTIVE NAV LINK on scroll ─── */
+const sections   = document.querySelectorAll('section[id]');
+const navAnchors = document.querySelectorAll('.nav__links a:not(.btn)');
+
+const sectionObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navAnchors.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+        });
+      }
+    });
+  },
+  { rootMargin: '-40% 0px -55% 0px' }
+);
+
+sections.forEach(s => sectionObserver.observe(s));
+
+/* ─── TILT EFFECT on cards (desktop only) ─── */
+if (window.matchMedia('(hover: hover)').matches) {
+  document.querySelectorAll('.service-card, .pricing-card, .testimonial-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect   = card.getBoundingClientRect();
+      const x      = e.clientX - rect.left;
+      const y      = e.clientY - rect.top;
+      const cx     = rect.width  / 2;
+      const cy     = rect.height / 2;
+      const rotateX = ((y - cy) / cy) * -4;
+      const rotateY = ((x - cx) / cx) *  4;
+      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+}
