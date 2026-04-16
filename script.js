@@ -37,6 +37,17 @@ hamburger.addEventListener('click', () => {
 
 navBackdrop.addEventListener('click', closeMobileNav);
 
+// Close mobile nav when clicking anywhere outside the nav/hamburger
+document.addEventListener('click', e => {
+  if (
+    hamburger.classList.contains('open') &&
+    !hamburger.contains(e.target) &&
+    !navLinks.contains(e.target)
+  ) {
+    closeMobileNav();
+  }
+});
+
 // Mobile nav links: close menu, then smooth-scroll
 navLinks.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', (e) => {
@@ -244,6 +255,7 @@ function hideCookieBanner() {
 // Show banner if never answered OR answered on an older version
 const stored = localStorage.getItem(COOKIE_KEY);
 if (!stored || !stored.endsWith('_' + COOKIE_VERSION)) {
+  cookieBanner.style.display = ''; // reset any inline display:none from a previous hide
   setTimeout(() => cookieBanner.classList.add('visible'), 800);
 }
 
