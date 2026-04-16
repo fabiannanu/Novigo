@@ -30,12 +30,12 @@
       </a>
       <!-- Desktop nav (hidden on mobile via CSS) -->
       <nav class="nav__links nav__links--desktop" id="navLinksDesktop">
-        <a href="#servicii">Servicii</a>
-        <a href="#portofoliu">Portofoliu</a>
-        <a href="#proces">Proces</a>
-        <a href="#preturi">Prețuri</a>
         <a href="#despre">Despre</a>
-        <a href="#contact" class="btn btn--nav">Hai să vorbim</a>
+        <a href="#proces">Proces</a>
+        <a href="#portofoliu">Portofoliu</a>
+        <a href="#servicii">Servicii</a>
+        <a href="#preturi">Prețuri</a>
+        <a href="#contact">Contact</a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Meniu">
         <span></span><span></span><span></span>
@@ -46,12 +46,12 @@
   <!-- Mobile overlay menu — outside header so no stacking context limit -->
   <div class="nav-backdrop" id="navBackdrop"></div>
   <nav class="nav__links nav__links--mobile" id="navLinks">
-    <a href="#servicii">Servicii</a>
-    <a href="#portofoliu">Portofoliu</a>
-    <a href="#proces">Proces</a>
-    <a href="#preturi">Prețuri</a>
     <a href="#despre">Despre</a>
-    <a href="#contact" class="btn btn--nav">Hai să vorbim</a>
+    <a href="#proces">Proces</a>
+    <a href="#portofoliu">Portofoliu</a>
+    <a href="#servicii">Servicii</a>
+    <a href="#preturi">Prețuri</a>
+    <a href="#contact">Contact</a>
   </nav>
 
   <!-- ─── HERO ─── -->
@@ -131,93 +131,113 @@
     </div>
   </section>
 
-  <!-- ─── SERVICII ─── -->
-  <section class="section" id="servicii">
+  <!-- ─── DESPRE ─── -->
+  <section class="section section--dark" id="despre">
+    <div class="container">
+      <div class="about__grid">
+        <div class="about__content reveal">
+          <p class="section__tag">Cine suntem</p>
+          <h2 class="section__title">Construim mai mult<br />decât <span class="gradient-text">website-uri</span></h2>
+          <p class="about__text">Novigo s-a născut din dorința de a ajuta afacerile locale românești să fie văzute și apreciate online, la fel cum merită să fie în viața reală.</p>
+          <p class="about__text">Știm că pentru un proprietar de afacere locală, fiecare leu investit contează. De aceea, nu vindem soluții generice — construim instrumente digitale care aduc rezultate concrete și măsurabile.</p>
+          <div class="about__values">
+            <div class="about__value">
+              <div class="about__value-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <strong>Transparență totală</strong>
+                <span>Știi mereu la ce să te aștepți.</span>
+              </div>
+            </div>
+            <div class="about__value">
+              <div class="about__value-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </div>
+              <div>
+                <strong>Focus pe rezultate</strong>
+                <span>Frumusețea e bonus — clienții sunt scopul.</span>
+              </div>
+            </div>
+            <div class="about__value">
+              <div class="about__value-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <div>
+                <strong>Parteneriat real</strong>
+                <span>Succesul tău este și succesul nostru.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about__visual reveal">
+          <div class="about__card-stack">
+            <div class="about__card about__card--back"></div>
+            <div class="about__card about__card--mid"></div>
+            <div class="about__card about__card--front">
+              <div class="about__card-inner">
+                <div class="about__metric">
+                  <span class="about__metric-num">48+</span>
+                  <span class="about__metric-label">proiecte livrate</span>
+                </div>
+                <div class="about__metric-divider"></div>
+                <div class="about__metric">
+                  <span class="about__metric-num">3 ani</span>
+                  <span class="about__metric-label">de experiență</span>
+                </div>
+                <div class="about__metric-divider"></div>
+                <div class="about__metric">
+                  <span class="about__metric-num">100%</span>
+                  <span class="about__metric-label">proiecte livrate la timp</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PROCES ─── -->
+  <section class="section" id="proces">
     <div class="container">
       <div class="section__header reveal">
-        <p class="section__tag">Ce facem</p>
-        <h2 class="section__title">Servicii complete<br /><span class="gradient-text">de prezență online</span></h2>
-        <p class="section__sub">De la primul pixel până la primii clienți — ne ocupăm de tot ce ai nevoie.</p>
+        <p class="section__tag">Cum lucrăm</p>
+        <h2 class="section__title">De la idee la lansare<br /><span class="gradient-text">în 4 pași simpli</span></h2>
+        <p class="section__sub">Un proces transparent și eficient, gândit să îți economisești timp și energie.</p>
       </div>
-      <div class="services__grid">
-        <div class="service-card reveal" data-delay="0">
-          <div class="service-card__icon">
-            <svg viewBox="0 0 48 48" fill="none"><rect x="4" y="8" width="40" height="28" rx="4" stroke="currentColor" stroke-width="2.5"/><path d="M16 44h16M24 36v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M12 20l5 5 8-8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="process__timeline">
+        <div class="process-step reveal" data-delay="0">
+          <div class="process-step__number">01</div>
+          <div class="process-step__content">
+            <h3>Descoperire & Strategie</h3>
+            <p>Înțelegem afacerea ta, publicul țintă și obiectivele. Stabilim împreună ce trebuie să facă site-ul pentru tine.</p>
+            <span class="process-step__time">1–2 zile</span>
           </div>
-          <h3>Website Prezentare</h3>
-          <p>Site profesional care comunică valoarea afacerii tale și convinge vizitatorii să te contacteze.</p>
-          <ul class="service-card__list">
-            <li>Design personalizat 100%</li>
-            <li>Optimizat pentru mobil</li>
-            <li>Rapid — sub 2 secunde</li>
-            <li>Livrare în 1–2 săptămâni</li>
-          </ul>
         </div>
-        <div class="service-card service-card--featured reveal" data-delay="100">
-          <div class="service-card__badge">Cel mai popular</div>
-          <div class="service-card__icon">
-            <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2.5"/><path d="M24 12v12l8 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M8 24h4M36 24h4M24 8v4M24 36v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <div class="process-step reveal" data-delay="150">
+          <div class="process-step__number">02</div>
+          <div class="process-step__content">
+            <h3>Design & Prototip</h3>
+            <p>Creăm un design personalizat care reflectă identitatea brandului tău. Tu aprobi fiecare detaliu înainte să scriem cod.</p>
+            <span class="process-step__time">3–5 zile</span>
           </div>
-          <h3>Website + Marketing</h3>
-          <p>Pachetul complet: site premium plus strategie de creștere a vizibilității și atragere a clienților locali.</p>
-          <ul class="service-card__list">
-            <li>Tot ce include Basic</li>
-            <li>Google My Business setup</li>
-            <li>Analytics & rapoarte lunare</li>
-            <li>Livrare în 1–2 săptămâni</li>
-          </ul>
         </div>
-        <div class="service-card reveal" data-delay="200">
-          <div class="service-card__icon">
-            <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2.5"/><rect x="26" y="8" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2.5"/><rect x="8" y="26" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2.5"/><rect x="26" y="26" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2.5"/></svg>
+        <div class="process-step reveal" data-delay="300">
+          <div class="process-step__number">03</div>
+          <div class="process-step__content">
+            <h3>Dezvoltare & Testare</h3>
+            <p>Construim site-ul rapid, optimizat și securizat. Testăm pe toate dispozitivele și browserele înainte de lansare.</p>
+            <span class="process-step__time">4–7 zile</span>
           </div>
-          <h3>Magazin Online</h3>
-          <p>E-commerce complet pentru a vinde produse sau servicii online, cu plăți integrate și gestionare simplă.</p>
-          <ul class="service-card__list">
-            <li>Catalog produse nelimitat</li>
-            <li>Plăți card & ramburs</li>
-            <li>Gestiune comenzi</li>
-            <li>Integrare curierat</li>
-          </ul>
         </div>
-        <div class="service-card reveal" data-delay="0">
-          <div class="service-card__icon">
-            <svg viewBox="0 0 48 48" fill="none"><path d="M24 4L4 14v20l20 10 20-10V14L24 4z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M24 4v30M4 14l20 10 20-10" stroke="currentColor" stroke-width="2.5"/></svg>
+        <div class="process-step reveal" data-delay="450">
+          <div class="process-step__number">04</div>
+          <div class="process-step__content">
+            <h3>Lansare & Suport</h3>
+            <p>Lansăm site-ul, te instruim cum să îl gestionezi și rămânem alături cu suport continuu.</p>
+            <span class="process-step__time">1 zi + suport ongoing</span>
           </div>
-          <h3>Redesign Website</h3>
-          <p>Transformăm site-ul tău vechi într-o prezență modernă care reflectă calitatea afacerii tale.</p>
-          <ul class="service-card__list">
-            <li>Analiză site existent</li>
-            <li>Design modern actualizat</li>
-            <li>Migrare conținut</li>
-            <li>Livrare în 1–2 săptămâni</li>
-          </ul>
-        </div>
-        <div class="service-card reveal" data-delay="100">
-          <div class="service-card__icon">
-            <svg viewBox="0 0 48 48" fill="none"><path d="M10 34C7 31 4 27 4 22a20 20 0 0140 0c0 5-3 9-6 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M24 44V22M16 30l8-8 8 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h3>Mentenanță & Hosting</h3>
-          <p>Grijă completă după lansare: actualizări, backup-uri zilnice, suport tehnic și hosting rapid.</p>
-          <ul class="service-card__list">
-            <li>Hosting SSD în România</li>
-            <li>Backup zilnic automat</li>
-            <li>Actualizări de securitate</li>
-            <li>Suport în 24h</li>
-          </ul>
-        </div>
-        <div class="service-card reveal" data-delay="200">
-          <div class="service-card__icon">
-            <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="16" r="8" stroke="currentColor" stroke-width="2.5"/><path d="M8 40c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-          </div>
-          <h3>Consultanță Digitală</h3>
-          <p>Analiză și strategie personalizată pentru a-ți maximiza prezența online și a atrage mai mulți clienți locali.</p>
-          <ul class="service-card__list">
-            <li>Audit prezență online</li>
-            <li>Strategie personalizată</li>
-            <li>Plan de acțiune clar</li>
-            <li>1 sesiune gratuită</li>
-          </ul>
         </div>
       </div>
     </div>
@@ -312,46 +332,93 @@
     </div>
   </section>
 
-  <!-- ─── PROCES ─── -->
-  <section class="section" id="proces">
+  <!-- ─── SERVICII ─── -->
+  <section class="section" id="servicii">
     <div class="container">
       <div class="section__header reveal">
-        <p class="section__tag">Cum lucrăm</p>
-        <h2 class="section__title">De la idee la lansare<br /><span class="gradient-text">în 4 pași simpli</span></h2>
-        <p class="section__sub">Un proces transparent și eficient, gândit să îți economisești timp și energie.</p>
+        <p class="section__tag">Ce facem</p>
+        <h2 class="section__title">Servicii complete<br /><span class="gradient-text">de prezență online</span></h2>
+        <p class="section__sub">De la primul pixel până la primii clienți — ne ocupăm de tot ce ai nevoie.</p>
       </div>
-      <div class="process__timeline">
-        <div class="process-step reveal" data-delay="0">
-          <div class="process-step__number">01</div>
-          <div class="process-step__content">
-            <h3>Descoperire & Strategie</h3>
-            <p>Înțelegem afacerea ta, publicul țintă și obiectivele. Stabilim împreună ce trebuie să facă site-ul pentru tine.</p>
-            <span class="process-step__time">1–2 zile</span>
+      <div class="services__grid">
+        <div class="service-card reveal" data-delay="0">
+          <div class="service-card__icon">
+            <svg viewBox="0 0 48 48" fill="none"><rect x="4" y="8" width="40" height="28" rx="4" stroke="currentColor" stroke-width="2.5"/><path d="M16 44h16M24 36v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M12 20l5 5 8-8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
+          <h3>Website Prezentare</h3>
+          <p>Site profesional care comunică valoarea afacerii tale și convinge vizitatorii să te contacteze.</p>
+          <ul class="service-card__list">
+            <li>Design personalizat 100%</li>
+            <li>Optimizat pentru mobil</li>
+            <li>Rapid — sub 2 secunde</li>
+            <li>Livrare în 1–2 săptămâni</li>
+          </ul>
         </div>
-        <div class="process-step reveal" data-delay="150">
-          <div class="process-step__number">02</div>
-          <div class="process-step__content">
-            <h3>Design & Prototip</h3>
-            <p>Creăm un design personalizat care reflectă identitatea brandului tău. Tu aprobi fiecare detaliu înainte să scriem cod.</p>
-            <span class="process-step__time">3–5 zile</span>
+        <div class="service-card service-card--featured reveal" data-delay="100">
+          <div class="service-card__badge">Cel mai popular</div>
+          <div class="service-card__icon">
+            <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2.5"/><path d="M24 12v12l8 4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M8 24h4M36 24h4M24 8v4M24 36v4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
           </div>
+          <h3>Website + Marketing</h3>
+          <p>Pachetul complet: site premium plus strategie de creștere a vizibilității și atragere a clienților locali.</p>
+          <ul class="service-card__list">
+            <li>Tot ce include Basic</li>
+            <li>Google My Business setup</li>
+            <li>Analytics & rapoarte lunare</li>
+            <li>Livrare în 1–2 săptămâni</li>
+          </ul>
         </div>
-        <div class="process-step reveal" data-delay="300">
-          <div class="process-step__number">03</div>
-          <div class="process-step__content">
-            <h3>Dezvoltare & Testare</h3>
-            <p>Construim site-ul rapid, optimizat și securizat. Testăm pe toate dispozitivele și browserele înainte de lansare.</p>
-            <span class="process-step__time">4–7 zile</span>
+        <div class="service-card reveal" data-delay="200">
+          <div class="service-card__icon">
+            <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2.5"/><rect x="26" y="8" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2.5"/><rect x="8" y="26" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2.5"/><rect x="26" y="26" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2.5"/></svg>
           </div>
+          <h3>Magazin Online</h3>
+          <p>E-commerce complet pentru a vinde produse sau servicii online, cu plăți integrate și gestionare simplă.</p>
+          <ul class="service-card__list">
+            <li>Catalog produse nelimitat</li>
+            <li>Plăți card & ramburs</li>
+            <li>Gestiune comenzi</li>
+            <li>Integrare curierat</li>
+          </ul>
         </div>
-        <div class="process-step reveal" data-delay="450">
-          <div class="process-step__number">04</div>
-          <div class="process-step__content">
-            <h3>Lansare & Suport</h3>
-            <p>Lansăm site-ul, te instruim cum să îl gestionezi și rămânem alături cu suport continuu.</p>
-            <span class="process-step__time">1 zi + suport ongoing</span>
+        <div class="service-card reveal" data-delay="0">
+          <div class="service-card__icon">
+            <svg viewBox="0 0 48 48" fill="none"><path d="M24 4L4 14v20l20 10 20-10V14L24 4z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M24 4v30M4 14l20 10 20-10" stroke="currentColor" stroke-width="2.5"/></svg>
           </div>
+          <h3>Redesign Website</h3>
+          <p>Transformăm site-ul tău vechi într-o prezență modernă care reflectă calitatea afacerii tale.</p>
+          <ul class="service-card__list">
+            <li>Analiză site existent</li>
+            <li>Design modern actualizat</li>
+            <li>Migrare conținut</li>
+            <li>Livrare în 1–2 săptămâni</li>
+          </ul>
+        </div>
+        <div class="service-card reveal" data-delay="100">
+          <div class="service-card__icon">
+            <svg viewBox="0 0 48 48" fill="none"><path d="M10 34C7 31 4 27 4 22a20 20 0 0140 0c0 5-3 9-6 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M24 44V22M16 30l8-8 8 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Mentenanță & Hosting</h3>
+          <p>Grijă completă după lansare: actualizări, backup-uri zilnice, suport tehnic și hosting rapid.</p>
+          <ul class="service-card__list">
+            <li>Hosting SSD în România</li>
+            <li>Backup zilnic automat</li>
+            <li>Actualizări de securitate</li>
+            <li>Suport în 24h</li>
+          </ul>
+        </div>
+        <div class="service-card reveal" data-delay="200">
+          <div class="service-card__icon">
+            <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="16" r="8" stroke="currentColor" stroke-width="2.5"/><path d="M8 40c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Consultanță Digitală</h3>
+          <p>Analiză și strategie personalizată pentru a-ți maximiza prezența online și a atrage mai mulți clienți locali.</p>
+          <ul class="service-card__list">
+            <li>Audit prezență online</li>
+            <li>Strategie personalizată</li>
+            <li>Plan de acțiune clar</li>
+            <li>1 sesiune gratuită</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -493,72 +560,6 @@
   </section>
 
   <!-- ─── DESPRE ─── -->
-  <section class="section section--dark" id="despre">
-    <div class="container">
-      <div class="about__grid">
-        <div class="about__content reveal">
-          <p class="section__tag">Cine suntem</p>
-          <h2 class="section__title">Construim mai mult<br />decât <span class="gradient-text">website-uri</span></h2>
-          <p class="about__text">Novigo s-a născut din dorința de a ajuta afacerile locale românești să fie văzute și apreciate online, la fel cum merită să fie în viața reală.</p>
-          <p class="about__text">Știm că pentru un proprietar de afacere locală, fiecare leu investit contează. De aceea, nu vindem soluții generice — construim instrumente digitale care aduc rezultate concrete și măsurabile.</p>
-          <div class="about__values">
-            <div class="about__value">
-              <div class="about__value-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-              <div>
-                <strong>Transparență totală</strong>
-                <span>Știi mereu la ce să te aștepți.</span>
-              </div>
-            </div>
-            <div class="about__value">
-              <div class="about__value-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-              </div>
-              <div>
-                <strong>Focus pe rezultate</strong>
-                <span>Frumusețea e bonus — clienții sunt scopul.</span>
-              </div>
-            </div>
-            <div class="about__value">
-              <div class="about__value-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              </div>
-              <div>
-                <strong>Parteneriat real</strong>
-                <span>Succesul tău este și succesul nostru.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="about__visual reveal">
-          <div class="about__card-stack">
-            <div class="about__card about__card--back"></div>
-            <div class="about__card about__card--mid"></div>
-            <div class="about__card about__card--front">
-              <div class="about__card-inner">
-                <div class="about__metric">
-                  <span class="about__metric-num">48+</span>
-                  <span class="about__metric-label">proiecte livrate</span>
-                </div>
-                <div class="about__metric-divider"></div>
-                <div class="about__metric">
-                  <span class="about__metric-num">3 ani</span>
-                  <span class="about__metric-label">de experiență</span>
-                </div>
-                <div class="about__metric-divider"></div>
-                <div class="about__metric">
-                  <span class="about__metric-num">100%</span>
-                  <span class="about__metric-label">proiecte livrate la timp</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ─── FAQ ─── -->
   <section class="section" id="faq">
     <div class="container">
