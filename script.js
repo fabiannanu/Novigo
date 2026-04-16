@@ -399,6 +399,55 @@ if (window.matchMedia('(hover: hover)').matches) {
   });
 }
 
+/* ─── TESTIMONIALS CAROUSEL ─── */
+(function () {
+  const track  = document.getElementById('tcTrack');
+  const dotsEl = document.getElementById('tcDots');
+  const btnPrev = document.getElementById('tcPrev');
+  const btnNext = document.getElementById('tcNext');
+  if (!track) return;
+
+  const slides = track.querySelectorAll('.tc__slide');
+  const total  = slides.length;
+  let current  = 0;
+  let autoTimer;
+
+  // build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'tc__dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Slide ' + (i + 1));
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(idx) {
+    current = (idx + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dotsEl.querySelectorAll('.tc__dot').forEach((d, i) =>
+      d.classList.toggle('active', i === current)
+    );
+  }
+
+  function startAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goTo(current + 1), 5000);
+  }
+
+  btnNext.addEventListener('click', () => { goTo(current + 1); startAuto(); });
+  btnPrev.addEventListener('click', () => { goTo(current - 1); startAuto(); });
+
+  // swipe support
+  let touchStartX = 0;
+  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) { goTo(current + (dx < 0 ? 1 : -1)); startAuto(); }
+  }, { passive: true });
+
+  startAuto();
+})();
+
 /* ─── PRICING CARD — 3D click flip ─── */
 document.querySelectorAll('.pricing-card').forEach(card => {
   card.addEventListener('mousedown', e => {
