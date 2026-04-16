@@ -398,3 +398,19 @@ if (window.matchMedia('(hover: hover)').matches) {
     });
   });
 }
+
+/* ─── PRICING CARD — 3D click flip ─── */
+document.querySelectorAll('.pricing-card').forEach(card => {
+  card.addEventListener('mousedown', e => {
+    const rect = card.getBoundingClientRect();
+    const side = e.clientX < rect.left + rect.width / 2 ? 'tilt-left' : 'tilt-right';
+    card.classList.add(side);
+    card.style.transform = '';
+
+    const cleanup = () => {
+      card.classList.remove('tilt-left', 'tilt-right');
+      document.removeEventListener('mouseup', cleanup);
+    };
+    document.addEventListener('mouseup', cleanup);
+  });
+});
