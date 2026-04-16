@@ -1995,6 +1995,7 @@ ul { list-style: none; }
   }
 
   .nav__links {
+    display: flex;
     position: fixed;
     inset: 0;
     background: transparent;
@@ -2003,10 +2004,12 @@ ul { list-style: none; }
     justify-content: center;
     gap: 4px;
     padding: 0;
+    /* hidden state */
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transform: translateY(12px);
-    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(16px);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.35s;
     z-index: 1050;
     border: none;
     box-shadow: none;
@@ -2014,16 +2017,18 @@ ul { list-style: none; }
 
   .nav__links.open {
     opacity: 1;
+    visibility: visible;
     pointer-events: all;
     transform: translateY(0);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0s;
   }
 
   .nav__links a:not(.btn) {
-    font-size: clamp(1.5rem, 5vw, 2.25rem);
+    font-size: clamp(1.6rem, 5vw, 2.5rem);
     font-weight: 700;
     letter-spacing: -0.02em;
-    color: rgba(255,255,255,0.75);
-    padding: 10px 24px;
+    color: rgba(255,255,255,0.7);
+    padding: 12px 28px;
     border-bottom: none;
     width: auto;
     transition: color 0.2s ease, transform 0.2s ease;
@@ -2031,11 +2036,11 @@ ul { list-style: none; }
 
   .nav__links a:not(.btn):hover {
     color: #fff;
-    transform: translateX(6px);
+    transform: translateX(8px);
   }
 
   .nav__links .btn--nav {
-    margin-top: 24px;
+    margin-top: 28px;
     font-size: 1rem;
     padding: 12px 32px;
     width: auto;
