@@ -280,16 +280,26 @@ ul { list-style: none; }
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(20px);
-  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1), visibility 0s linear 0.35s;
+  transform: scale(0.85);
+  filter: blur(8px);
+  transition: opacity 0.38s ease, transform 0.38s cubic-bezier(0.4,0,0.2,1), filter 0.38s ease, visibility 0s linear 0.38s;
 }
 
 .nav__links--mobile.open {
   visibility: visible;
   opacity: 1;
   pointer-events: all;
-  transform: translateY(0);
-  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1), visibility 0s linear 0s;
+  transform: scale(1);
+  filter: blur(0px);
+  transition: opacity 0.32s ease, transform 0.32s cubic-bezier(0.2,0,0,1), filter 0.32s ease, visibility 0s linear 0s;
+}
+
+/* vacuum close state */
+.nav__links--mobile.closing {
+  opacity: 0;
+  transform: scale(0.6);
+  filter: blur(14px);
+  transition: opacity 0.32s ease, transform 0.32s cubic-bezier(0.4,0,1,1), filter 0.32s ease, visibility 0s linear 0.32s;
 }
 
 .nav__links--mobile a:not(.btn) {
@@ -2047,12 +2057,17 @@ ul { list-style: none; }
     z-index: 9990;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.35s ease;
+    transition: opacity 0.38s ease;
   }
 
   .nav-backdrop.open {
     opacity: 1;
     pointer-events: all;
+  }
+
+  .nav-backdrop.closing {
+    opacity: 0;
+    transition: opacity 0.32s ease;
   }
 
   .hero__stats {

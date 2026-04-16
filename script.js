@@ -20,9 +20,16 @@ const navLinks     = document.getElementById('navLinks');     // mobile overlay
 const navBackdrop  = document.getElementById('navBackdrop');
 
 function closeMobileNav() {
+  // Trigger vacuum effect
+  navLinks.classList.add('closing');
+  navBackdrop.classList.add('closing');
+
+  setTimeout(() => {
+    navLinks.classList.remove('open', 'closing');
+    navBackdrop.classList.remove('open', 'closing');
+  }, 320);
+
   hamburger.classList.remove('open');
-  navLinks.classList.remove('open');
-  navBackdrop.classList.remove('open');
   document.body.style.overflow = '';
   hamburger.setAttribute('aria-expanded', 'false');
 }
