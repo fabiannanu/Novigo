@@ -42,19 +42,22 @@ if (navBackdrop) {
 // Close menu then smooth-scroll to target
 navLinks.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', (e) => {
+    // Always stop the global smooth-scroll handler from also firing
+    e.preventDefault();
+    e.stopPropagation();
+
     const href = link.getAttribute('href');
     const target = href && href !== '#' ? document.querySelector(href) : null;
 
     closeMobileNav();
 
     if (target) {
-      e.preventDefault();
-      // wait for menu close transition (0.3s) then scroll
+      // Wait for menu close transition (0.35s) then scroll
       setTimeout(() => {
         const navH = navbar ? navbar.offsetHeight : 0;
         const top  = target.getBoundingClientRect().top + window.scrollY - navH - 16;
         window.scrollTo({ top, behavior: 'smooth' });
-      }, 320);
+      }, 380);
     }
   });
 });
