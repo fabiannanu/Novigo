@@ -37,13 +37,9 @@ hamburger.addEventListener('click', () => {
 
 navBackdrop.addEventListener('click', closeMobileNav);
 
-// Close mobile nav when clicking anywhere outside the nav/hamburger
-document.addEventListener('click', e => {
-  if (
-    hamburger.classList.contains('open') &&
-    !hamburger.contains(e.target) &&
-    !navLinks.contains(e.target)
-  ) {
+// Close mobile nav when clicking on the nav overlay itself (the dark area between links)
+navLinks.addEventListener('click', e => {
+  if (e.target === navLinks) {
     closeMobileNav();
   }
 });
