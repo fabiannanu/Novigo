@@ -15,14 +15,14 @@ window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
 /* ─── MOBILE MENU ─── */
-const hamburger   = document.getElementById('hamburger');
-const navLinks    = document.getElementById('navLinks');
-const navBackdrop = document.getElementById('navBackdrop');
+const hamburger    = document.getElementById('hamburger');
+const navLinks     = document.getElementById('navLinks');     // mobile overlay
+const navBackdrop  = document.getElementById('navBackdrop');
 
 function closeMobileNav() {
   hamburger.classList.remove('open');
   navLinks.classList.remove('open');
-  if (navBackdrop) navBackdrop.classList.remove('open');
+  navBackdrop.classList.remove('open');
   document.body.style.overflow = '';
   hamburger.setAttribute('aria-expanded', 'false');
 }
@@ -30,29 +30,22 @@ function closeMobileNav() {
 hamburger.addEventListener('click', () => {
   const isOpen = hamburger.classList.toggle('open');
   navLinks.classList.toggle('open', isOpen);
-  if (navBackdrop) navBackdrop.classList.toggle('open', isOpen);
+  navBackdrop.classList.toggle('open', isOpen);
   document.body.style.overflow = isOpen ? 'hidden' : '';
   hamburger.setAttribute('aria-expanded', isOpen);
 });
 
-if (navBackdrop) {
-  navBackdrop.addEventListener('click', closeMobileNav);
-}
+navBackdrop.addEventListener('click', closeMobileNav);
 
-// Close menu then smooth-scroll to target
+// Mobile nav links: close menu, then smooth-scroll
 navLinks.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', (e) => {
-    // Always stop the global smooth-scroll handler from also firing
     e.preventDefault();
     e.stopPropagation();
-
-    const href = link.getAttribute('href');
+    const href   = link.getAttribute('href');
     const target = href && href !== '#' ? document.querySelector(href) : null;
-
     closeMobileNav();
-
     if (target) {
-      // Wait for menu close transition (0.35s) then scroll
       setTimeout(() => {
         const navH = navbar ? navbar.offsetHeight : 0;
         const top  = target.getBoundingClientRect().top + window.scrollY - navH - 16;
@@ -280,7 +273,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 /* ─── ACTIVE NAV LINK on scroll ─── */
 const sections   = document.querySelectorAll('section[id]');
-const navAnchors = document.querySelectorAll('.nav__links a:not(.btn)');
+const navAnchors = document.querySelectorAll('.nav__links--desktop a:not(.btn)');
 
 const sectionObserver = new IntersectionObserver(
   entries => {

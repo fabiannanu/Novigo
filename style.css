@@ -250,20 +250,68 @@ ul { list-style: none; }
 
 .logo__name { color: var(--text-1); }
 
-.nav__links {
+/* Desktop nav */
+.nav__links--desktop {
   display: flex;
   align-items: center;
   gap: 36px;
 }
 
-.nav__links a:not(.btn) {
+.nav__links--desktop a:not(.btn) {
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-2);
   transition: color var(--transition);
 }
 
-.nav__links a:not(.btn):hover { color: var(--text-1); }
+.nav__links--desktop a:not(.btn):hover { color: var(--text-1); }
+
+/* Mobile overlay nav — hidden by default everywhere */
+.nav__links--mobile {
+  display: flex;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1), visibility 0s linear 0.35s;
+}
+
+.nav__links--mobile.open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.4,0,0.2,1), visibility 0s linear 0s;
+}
+
+.nav__links--mobile a:not(.btn) {
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,0.75);
+  padding: 12px 28px;
+  transition: color 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.nav__links--mobile a:not(.btn):hover {
+  color: #fff;
+  transform: translateX(8px);
+}
+
+.nav__links--mobile .btn--nav {
+  margin-top: 28px;
+  font-size: 1rem;
+  padding: 12px 32px;
+}
 
 .nav-backdrop { display: none; }
 
@@ -1975,7 +2023,20 @@ ul { list-style: none; }
 @media (max-width: 768px) {
   .section { padding: 72px 0; }
 
-  /* ── Full-screen centered overlay menu ── */
+  /* Hide desktop nav, show hamburger */
+  .nav__links--desktop { display: none; }
+
+  .hamburger {
+    display: flex;
+    z-index: 10000;
+    position: relative;
+  }
+
+  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  /* Backdrop */
   .nav-backdrop {
     display: block;
     position: fixed;
@@ -1983,7 +2044,7 @@ ul { list-style: none; }
     background: rgba(5, 5, 15, 0.92);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    z-index: 1040;
+    z-index: 9990;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.35s ease;
@@ -1993,68 +2054,6 @@ ul { list-style: none; }
     opacity: 1;
     pointer-events: all;
   }
-
-  .nav__links {
-    display: flex;
-    position: fixed;
-    inset: 0;
-    background: transparent;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    padding: 0;
-    /* hidden state */
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateY(16px);
-    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0.35s;
-    z-index: 1050;
-    border: none;
-    box-shadow: none;
-  }
-
-  .nav__links.open {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: all;
-    transform: translateY(0);
-    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s linear 0s;
-  }
-
-  .nav__links a:not(.btn) {
-    font-size: clamp(1.6rem, 5vw, 2.5rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: rgba(255,255,255,0.7);
-    padding: 12px 28px;
-    border-bottom: none;
-    width: auto;
-    transition: color 0.2s ease, transform 0.2s ease;
-  }
-
-  .nav__links a:not(.btn):hover {
-    color: #fff;
-    transform: translateX(8px);
-  }
-
-  .nav__links .btn--nav {
-    margin-top: 28px;
-    font-size: 1rem;
-    padding: 12px 32px;
-    width: auto;
-  }
-
-  .hamburger {
-    display: flex;
-    z-index: 1060;
-    position: relative;
-  }
-
-  .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-  .hamburger.open span:nth-child(2) { opacity: 0; }
-  .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
   .hero__stats {
     padding: 20px;

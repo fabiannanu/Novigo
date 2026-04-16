@@ -24,12 +24,12 @@
               </linearGradient>
             </defs>
             <rect width="36" height="36" rx="8" fill="url(#logo-grad)"/>
-            <!-- N: filled path, clean sharp corners, no stroke artifacts -->
             <path d="M9 27V9h3.2v11.8L23.8 9H27v18h-3.2V15.2L12.2 27H9Z" fill="white"/>
           </svg>
         <span class="logo__name">Novigo</span>
       </a>
-      <nav class="nav__links" id="navLinks">
+      <!-- Desktop nav (hidden on mobile via CSS) -->
+      <nav class="nav__links nav__links--desktop" id="navLinksDesktop">
         <a href="#servicii">Servicii</a>
         <a href="#portofoliu">Portofoliu</a>
         <a href="#proces">Proces</a>
@@ -42,8 +42,17 @@
       </button>
     </div>
   </header>
-  <!-- Mobile nav backdrop -->
+
+  <!-- Mobile overlay menu — outside header so no stacking context limit -->
   <div class="nav-backdrop" id="navBackdrop"></div>
+  <nav class="nav__links nav__links--mobile" id="navLinks">
+    <a href="#servicii">Servicii</a>
+    <a href="#portofoliu">Portofoliu</a>
+    <a href="#proces">Proces</a>
+    <a href="#preturi">Prețuri</a>
+    <a href="#despre">Despre</a>
+    <a href="#contact" class="btn btn--nav">Hai să vorbim</a>
+  </nav>
 
   <!-- ─── HERO ─── -->
   <section class="hero hero--video" id="hero">
