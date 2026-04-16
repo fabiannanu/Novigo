@@ -248,6 +248,13 @@ ul { list-style: none; }
   display: block;
 }
 
+.logo__img {
+  height: 44px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
 .logo__name { color: var(--text-1); }
 
 /* Desktop nav */
