@@ -225,7 +225,7 @@ if (contactForm) {
       `Nume: ${nameVal}\nEmail: ${emailVal}\nTelefon: ${phoneVal}\nTip afacere: ${businessVal}\nServiciu dorit: ${serviceVal}\n\nMesaj:\n${messageVal}`
     );
 
-    window.location.href = `mailto:alexandrunanu23@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:novigo.biz@yahoo.com?subject=${subject}&body=${body}`;
 
     await new Promise(r => setTimeout(r, 800));
 
