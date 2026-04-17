@@ -84,6 +84,119 @@ const revealObserver = new IntersectionObserver(
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
+/* ─── TEXT REVEAL (per-word scroll animation on headings) ─── */
+(function initTextReveal() {
+  const headings = document.querySelectorAll('.hero__title, .section__title, .cta-banner h2');
+  if (!headings.length) return;
+
+  let wordCounter = 0;
+
+  const wrapTextNode = (textNode, isGradient) => {
+    const frag = document.createDocumentFragment();
+    const parts = textNode.textContent.split(/(\s+)/);
+    parts.forEach(part => {
+      if (part === '') return;
+      if (/^\s+$/.test(part)) {
+        frag.appendChild(document.createTextNode(part));
+        return;
+      }
+      const word = document.createElement('span');
+      word.className = 'word' + (isGradient ? ' word--gradient' : '');
+      word.style.setProperty('--word-i', wordCounter++);
+      const inner = document.createElement('span');
+      inner.className = 'word__inner';
+      inner.textContent = part;
+      word.appendChild(inner);
+      frag.appendChild(word);
+    });
+    textNode.parentNode.replaceChild(frag, textNode);
+  };
+
+  const splitHeading = (heading) => {
+    wordCounter = 0;
+    heading.classList.add('text-reveal');
+    // Walk direct children; handle <br>, .gradient-text spans, text nodes
+    const children = Array.from(heading.childNodes);
+    children.forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        wrapTextNode(node, false);
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        if (node.tagName === 'BR') return;
+        if (node.classList && node.classList.contains('gradient-text')) {
+          // Replace the whole gradient span with wrapped words that carry --gradient style
+          const innerText = node.textContent;
+          const tmp = document.createTextNode(innerText);
+          node.parentNode.replaceChild(tmp, node);
+          wrapTextNode(tmp, true);
+        } else {
+          // Fallback: leave as-is
+        }
+      }
+    });
+  };
+
+  const textObserver = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          textObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.25, rootMargin: '0px 0px -60px 0px' }
+  );
+
+  headings.forEach(h => {
+    splitHeading(h);
+    textObserver.observe(h);
+  });
+})();
+
+/* ─── SERVICE CARDS: mouse-tracked spotlight ─── */
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+    card.style.setProperty('--my', `${e.clientY - rect.top}px`);
+  });
+});
+
+/* ─── MAGNETIC BUTTONS (primary CTAs) ─── */
+document.querySelectorAll('.btn--primary').forEach(btn => {
+  const strength = 14;
+  btn.addEventListener('mousemove', e => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top  - rect.height / 2;
+    btn.style.transform = `translate(${(x / rect.width) * strength}px, ${(y / rect.height) * strength - 2}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = '';
+  });
+});
+
+/* ─── HERO PARALLAX (gradient orbs follow mouse) ─── */
+(function initHeroParallax() {
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  const gradA = hero.querySelector('.hero__grad--tl');
+  const gradB = hero.querySelector('.hero__grad--br');
+  if (!gradA && !gradB) return;
+
+  hero.addEventListener('mousemove', e => {
+    const rect = hero.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width  - 0.5;
+    const y = (e.clientY - rect.top)  / rect.height - 0.5;
+    if (gradA) gradA.style.translate = `${x * 30}px ${y * 30}px`;
+    if (gradB) gradB.style.translate = `${x * -40}px ${y * -40}px`;
+  });
+  hero.addEventListener('mouseleave', () => {
+    if (gradA) gradA.style.translate = '';
+    if (gradB) gradB.style.translate = '';
+  });
+})();
+
 /* ─── ANIMATED COUNTERS ─── */
 function animateCounter(el) {
   const target = parseInt(el.dataset.target, 10);
