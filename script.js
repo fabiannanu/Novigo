@@ -339,52 +339,77 @@ if (contactForm) {
     // Basic validation
     const required = contactForm.querySelectorAll('[required]');
     let valid = true;
+    let firstInvalid = null;
 
     required.forEach(field => {
       field.style.borderColor = '';
       if (!field.value.trim()) {
         field.style.borderColor = '#f87171';
         valid = false;
+        if (!firstInvalid) firstInvalid = field;
       }
     });
 
     if (!valid) {
-      contactForm.querySelector('[required]').focus();
+      firstInvalid.focus();
       return;
     }
 
-    // Build mailto and open email client
+    // Submit via Formspree
     btn.disabled = true;
     btnText.hidden = true;
     btnLoad.hidden = false;
 
-    const nameVal    = (contactForm.querySelector('#name').value || '').trim();
-    const emailVal   = (contactForm.querySelector('#email').value || '').trim();
-    const phoneVal   = (contactForm.querySelector('#phone').value || '').trim();
-    const businessVal= (contactForm.querySelector('#business').value || '').trim();
-    const serviceVal = (contactForm.querySelector('#service').value || '').trim();
-    const messageVal = (contactForm.querySelector('#message').value || '').trim();
+    try {
+      const response = await fetch('https://formspree.io/f/xeevkgyb', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(contactForm),
+      });
 
-    const subject = encodeURIComponent(`Cerere website — ${nameVal}`);
-    const body = encodeURIComponent(
-      `Nume: ${nameVal}\nEmail: ${emailVal}\nTelefon: ${phoneVal}\nTip afacere: ${businessVal}\nServiciu dorit: ${serviceVal}\n\nMesaj:\n${messageVal}`
-    );
-
-    window.location.href = `mailto:novigo.biz@yahoo.com?subject=${subject}&body=${body}`;
-
-    await new Promise(r => setTimeout(r, 800));
-
-    contactForm.hidden    = true;
-    formSuccess.hidden    = false;
-    formSuccess.style.display = 'block';
+      if (response.ok) {
+        contactForm.hidden        = true;
+        formSuccess.hidden        = false;
+        formSuccess.style.display = 'block';
+      } else {
+        const data = await response.json();
+        const msg = data?.errors?.map(e => e.message).join(', ') || 'Eroare la trimitere. Încearcă din nou.';
+        alert(msg);
+        btn.disabled   = false;
+        btnText.hidden = false;
+        btnLoad.hidden = true;
+      }
+    } catch {
+      alert('Eroare de rețea. Verifică conexiunea și încearcă din nou.');
+      btn.disabled   = false;
+      btnText.hidden = false;
+      btnLoad.hidden = true;
+    }
   });
 
   // Live validation reset
-  contactForm.querySelectorAll('input, textarea').forEach(field => {
+  contactForm.querySelectorAll('input, select, textarea').forEach(field => {
     field.addEventListener('input', () => {
       field.style.borderColor = '';
     });
+    field.addEventListener('change', () => {
+      field.style.borderColor = '';
+    });
   });
+
+  // Reset form to show it again
+  const formReset = document.getElementById('formReset');
+  if (formReset) {
+    formReset.addEventListener('click', () => {
+      contactForm.reset();
+      contactForm.querySelectorAll('input, select, textarea').forEach(f => {
+        f.style.borderColor = '';
+      });
+      formSuccess.hidden = true;
+      formSuccess.style.display = '';
+      contactForm.hidden = false;
+    });
+  }
 }
 
 /* ─── COOKIE BANNER ─── */

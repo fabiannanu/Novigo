@@ -667,12 +667,12 @@
               </div>
             </div>
             <div class="form__group">
-              <label for="phone">Telefon</label>
-              <input type="tel" id="phone" name="phone" placeholder="07xx xxx xxx" />
+              <label for="phone">Telefon *</label>
+              <input type="tel" id="phone" name="phone" placeholder="07xx xxx xxx" required />
             </div>
             <div class="form__group">
-              <label for="business">Tipul afacerii tale</label>
-              <select id="business" name="business">
+              <label for="business">Tipul afacerii tale *</label>
+              <select id="business" name="business" required>
                 <option value="">Selectează...</option>
                 <option>Restaurant / Cafenea / Patiserie</option>
                 <option>Clinică / Cabinet Medical</option>
@@ -685,8 +685,8 @@
               </select>
             </div>
             <div class="form__group">
-              <label for="service">Ce te interesează?</label>
-              <select id="service" name="service">
+              <label for="service">Ce te interesează? *</label>
+              <select id="service" name="service" required>
                 <option value="">Selectează serviciul...</option>
                 <option>Website Prezentare</option>
                 <option>Website + Marketing</option>
@@ -716,6 +716,7 @@
             </div>
             <h3>Mesaj trimis!</h3>
             <p>Mulțumim! Te vom contacta în cel mult 24 de ore.</p>
+            <button type="button" class="btn btn--primary" id="formReset" style="margin-top:1.5rem;">Trimite alt mesaj</button>
           </div>
         </div>
       </div>
@@ -914,6 +915,7 @@
     </div>
   </div>
 
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
   <script src="script.js"></script>
 
   <!-- HLS.js for hero video (browsers that don't support HLS natively) -->
