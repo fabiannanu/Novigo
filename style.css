@@ -166,7 +166,8 @@ ul { list-style: none; }
 }
 
 .section__tag {
-  display: inline-flex;
+  display: flex;
+  width: fit-content;
   align-items: center;
   gap: 8px;
   font-size: 12px;
@@ -187,6 +188,13 @@ ul { list-style: none; }
   position: relative;
   overflow: hidden;
   animation: tag-float 4.5s ease-in-out infinite;
+}
+
+.section__header .section__tag,
+.contact__info .section__tag,
+.about__content .section__tag {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section__tag::after {
