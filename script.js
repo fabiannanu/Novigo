@@ -259,6 +259,46 @@ filterBtns.forEach(btn => {
   });
 });
 
+/* ─── PROCESS TIMELINE: scroll-driven connecting line ─── */
+(function initProcessTimeline() {
+  const timeline = document.querySelector('.process__timeline');
+  if (!timeline) return;
+  const steps = Array.from(timeline.querySelectorAll('.process-step'));
+  if (!steps.length) return;
+
+  const update = () => {
+    const rect = timeline.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const anchor = vh * 0.55;
+
+    // Progress across the timeline's height, based on where the viewport anchor is
+    const raw = (anchor - rect.top) / rect.height;
+    const progress = Math.max(0, Math.min(1, raw));
+    timeline.style.setProperty('--progress', progress.toFixed(4));
+
+    // Activate steps whose number circle the line has reached
+    steps.forEach(step => {
+      const num = step.querySelector('.process-step__number');
+      if (!num) return;
+      const numRect = num.getBoundingClientRect();
+      const numCenter = numRect.top + numRect.height / 2;
+      if (numCenter <= anchor) step.classList.add('is-active');
+      else step.classList.remove('is-active');
+    });
+  };
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { update(); ticking = false; });
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
+
 /* ─── PRICING TOGGLE (removed — only one-time pricing) ─── */
 
 /* ─── FAQ ACCORDION ─── */
@@ -266,29 +306,21 @@ const faqItems = document.querySelectorAll('.faq-item');
 
 faqItems.forEach(item => {
   const question = item.querySelector('.faq-item__question');
-  const answer   = item.querySelector('.faq-item__answer');
-  const inner    = answer.querySelector('p');
+  question.setAttribute('aria-expanded', 'false');
 
   question.addEventListener('click', () => {
-    const isOpen = item.classList.contains('open');
+    const willOpen = !item.classList.contains('open');
 
-    // Close all
     faqItems.forEach(i => {
       i.classList.remove('open');
-      i.querySelector('.faq-item__answer').style.height = '0';
+      const q = i.querySelector('.faq-item__question');
+      if (q) q.setAttribute('aria-expanded', 'false');
     });
 
-    // Toggle clicked
-    if (!isOpen) {
+    if (willOpen) {
       item.classList.add('open');
-      answer.style.height = inner.offsetHeight + 'px';
+      question.setAttribute('aria-expanded', 'true');
     }
-  });
-
-  // Accessibility
-  question.setAttribute('aria-expanded', 'false');
-  item.addEventListener('transitionend', () => {
-    question.setAttribute('aria-expanded', item.classList.contains('open'));
   });
 });
 
