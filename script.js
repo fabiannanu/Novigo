@@ -405,6 +405,12 @@ if (contactForm) {
       contactForm.querySelectorAll('input, select, textarea').forEach(f => {
         f.style.borderColor = '';
       });
+      const btn     = contactForm.querySelector('.btn');
+      const btnText = btn.querySelector('.btn__text');
+      const btnLoad = btn.querySelector('.btn__loading');
+      btn.disabled   = false;
+      btnText.hidden = false;
+      btnLoad.hidden = true;
       formSuccess.hidden = true;
       formSuccess.style.display = '';
       contactForm.hidden = false;
