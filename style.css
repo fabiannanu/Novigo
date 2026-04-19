@@ -365,6 +365,11 @@ ul { list-style: none; }
 .reveal--instant {
   transition: none !important;
 }
+
+/* Offset scrollIntoView by navbar height */
+section[id] {
+  scroll-margin-top: 80px;
+}
 .reveal[data-delay="100"] { transition-delay: 0.1s; }
 .reveal[data-delay="150"] { transition-delay: 0.15s; }
 .reveal[data-delay="200"] { transition-delay: 0.2s; }

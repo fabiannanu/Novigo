@@ -469,18 +469,16 @@ cookieDecline.addEventListener('click', () => {
 /* ─── SMOOTH ANCHOR SCROLL ─── */
 function smoothScrollToTarget(target) {
   if (!target) return;
-  // Instantly reveal every .reveal element so their translateY(32px) offset
-  // doesn't shift layout mid-scroll. Use a class that disables the transition
-  // so the reveal is immediate (no 0.7s animation while scrolling).
+  // Instantly reveal every .reveal element so translateY(32px) doesn't
+  // cause layout shifts mid-scroll that pull the target off-screen.
   document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
     el.classList.add('visible', 'reveal--instant');
   });
-  // Force layout, then scroll to the now-stable target position.
-  requestAnimationFrame(() => {
-    const navH = navbar ? navbar.offsetHeight : 0;
-    const top  = target.getBoundingClientRect().top + window.scrollY - navH - 16;
-    window.scrollTo({ top, behavior: 'smooth' });
-  });
+  // Wait two frames so the browser has fully applied the layout changes,
+  // then use scrollIntoView which continuously recalculates position.
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
 }
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
