@@ -4,6 +4,13 @@
 
 'use strict';
 
+/* ─── FORCE SCROLL TO TOP ON REFRESH ─── */
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.addEventListener('beforeunload', () => { window.scrollTo(0, 0); });
+window.scrollTo(0, 0);
+
 /* ─── NAVBAR scroll behaviour ─── */
 const navbar = document.getElementById('navbar');
 
@@ -449,6 +456,30 @@ cookieDecline.addEventListener('click', () => {
 });
 
 /* ─── SMOOTH ANCHOR SCROLL ─── */
+function smoothScrollToTarget(target) {
+  if (!target) return;
+  // Pre-reveal any in-between .reveal elements so their translateY doesn't
+  // shift layout mid-scroll (which would make us land short of the target).
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < target.getBoundingClientRect().top + window.innerHeight) {
+      el.classList.add('visible');
+    }
+  });
+  // Scroll after layout settles, then correct once more if needed.
+  requestAnimationFrame(() => {
+    const navH = navbar ? navbar.offsetHeight : 0;
+    const top  = target.getBoundingClientRect().top + window.scrollY - navH - 16;
+    window.scrollTo({ top, behavior: 'smooth' });
+    setTimeout(() => {
+      const corrected = target.getBoundingClientRect().top + window.scrollY - navH - 16;
+      if (Math.abs(corrected - window.scrollY) > 4) {
+        window.scrollTo({ top: corrected, behavior: 'smooth' });
+      }
+    }, 650);
+  });
+}
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', e => {
     const id = anchor.getAttribute('href');
@@ -456,9 +487,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(id);
     if (!target) return;
     e.preventDefault();
-    const navH = navbar.offsetHeight;
-    const top  = target.getBoundingClientRect().top + window.scrollY - navH - 16;
-    window.scrollTo({ top, behavior: 'smooth' });
+    smoothScrollToTarget(target);
   });
 });
 

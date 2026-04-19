@@ -540,7 +540,12 @@ ul { list-style: none; }
 }
 
 /* Video background */
-.hero--video { background: #000; }
+.hero--video {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(29, 27, 90, 0.55) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 80%, rgba(49, 46, 129, 0.45) 0%, transparent 55%),
+    #0a0a14;
+}
 
 .hero__video {
   position: absolute;
@@ -551,6 +556,7 @@ ul { list-style: none; }
   object-position: center;
   opacity: 0.6;
   z-index: 0;
+  background: #0a0a14;
 }
 
 .hero__video-overlay {
