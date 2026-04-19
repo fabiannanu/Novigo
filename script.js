@@ -11,6 +11,17 @@ if ('scrollRestoration' in history) {
 window.addEventListener('beforeunload', () => { window.scrollTo(0, 0); });
 window.scrollTo(0, 0);
 
+/* ─── HERO VIDEO: fade in when playable ─── */
+(function initHeroVideo() {
+  const video = document.querySelector('.hero__video');
+  if (!video) return;
+  const markReady = () => video.classList.add('is-ready');
+  video.addEventListener('playing', markReady, { once: true });
+  video.addEventListener('loadeddata', () => {
+    if (video.readyState >= 3) markReady();
+  });
+})();
+
 /* ─── NAVBAR scroll behaviour ─── */
 const navbar = document.getElementById('navbar');
 
@@ -458,25 +469,17 @@ cookieDecline.addEventListener('click', () => {
 /* ─── SMOOTH ANCHOR SCROLL ─── */
 function smoothScrollToTarget(target) {
   if (!target) return;
-  // Pre-reveal any in-between .reveal elements so their translateY doesn't
-  // shift layout mid-scroll (which would make us land short of the target).
+  // Instantly reveal every .reveal element so their translateY(32px) offset
+  // doesn't shift layout mid-scroll. Use a class that disables the transition
+  // so the reveal is immediate (no 0.7s animation while scrolling).
   document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < target.getBoundingClientRect().top + window.innerHeight) {
-      el.classList.add('visible');
-    }
+    el.classList.add('visible', 'reveal--instant');
   });
-  // Scroll after layout settles, then correct once more if needed.
+  // Force layout, then scroll to the now-stable target position.
   requestAnimationFrame(() => {
     const navH = navbar ? navbar.offsetHeight : 0;
     const top  = target.getBoundingClientRect().top + window.scrollY - navH - 16;
     window.scrollTo({ top, behavior: 'smooth' });
-    setTimeout(() => {
-      const corrected = target.getBoundingClientRect().top + window.scrollY - navH - 16;
-      if (Math.abs(corrected - window.scrollY) > 4) {
-        window.scrollTo({ top: corrected, behavior: 'smooth' });
-      }
-    }, 650);
   });
 }
 

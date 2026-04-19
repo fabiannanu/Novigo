@@ -360,6 +360,11 @@ ul { list-style: none; }
   opacity: 1;
   transform: translateY(0);
 }
+/* Used by smooth anchor scroll to apply reveal state instantly (no transition)
+   so pre-revealed elements don't shift layout while we're scrolling. */
+.reveal--instant {
+  transition: none !important;
+}
 .reveal[data-delay="100"] { transition-delay: 0.1s; }
 .reveal[data-delay="150"] { transition-delay: 0.15s; }
 .reveal[data-delay="200"] { transition-delay: 0.2s; }
@@ -541,10 +546,30 @@ ul { list-style: none; }
 
 /* Video background */
 .hero--video {
+  background: #0a0a14;
+}
+
+/* Instant-loading animated blueish background — shows immediately while video buffers */
+.hero--video::before {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  z-index: 0;
   background:
-    radial-gradient(ellipse at 30% 20%, rgba(29, 27, 90, 0.55) 0%, transparent 55%),
-    radial-gradient(ellipse at 70% 80%, rgba(49, 46, 129, 0.45) 0%, transparent 55%),
-    #0a0a14;
+    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(80, 70, 220, 0.55) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 45% at 80% 70%, rgba(60, 90, 200, 0.50) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 60% at 60% 20%, rgba(40, 50, 140, 0.45) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 55% at 30% 85%, rgba(100, 60, 200, 0.40) 0%, transparent 60%),
+    linear-gradient(135deg, #0a0a1f 0%, #141435 50%, #0a0a1f 100%);
+  animation: hero-bg-drift 20s ease-in-out infinite alternate;
+  filter: blur(40px);
+}
+
+@keyframes hero-bg-drift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  33%  { transform: translate3d(-30px, 20px, 0) scale(1.05); }
+  66%  { transform: translate3d(25px, -15px, 0) scale(1.02); }
+  100% { transform: translate3d(-15px, 25px, 0) scale(1.06); }
 }
 
 .hero__video {
@@ -554,9 +579,13 @@ ul { list-style: none; }
   height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: 0.6;
+  opacity: 0;
   z-index: 0;
-  background: #0a0a14;
+  transition: opacity 1.2s ease;
+}
+
+.hero__video.is-ready {
+  opacity: 0.6;
 }
 
 .hero__video-overlay {
