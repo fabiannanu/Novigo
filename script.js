@@ -171,8 +171,8 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
   });
 })();
 
-/* ─── SERVICE CARDS: mouse-tracked spotlight ─── */
-document.querySelectorAll('.service-card').forEach(card => {
+/* ─── SERVICE & PRICING CARDS: mouse-tracked spotlight ─── */
+document.querySelectorAll('.service-card, .pricing-card').forEach(card => {
   card.addEventListener('mousemove', e => {
     const rect = card.getBoundingClientRect();
     card.style.setProperty('--mx', `${e.clientX - rect.left}px`);
@@ -290,7 +290,9 @@ filterBtns.forEach(btn => {
     const anchor = vh * 0.55;
 
     // Progress across the timeline's height, based on where the viewport anchor is
-    const raw = (anchor - rect.top) / rect.height;
+    const trackStart = rect.top + 80;
+    const trackEnd   = rect.bottom - 80;
+    const raw = (anchor - trackStart) / (trackEnd - trackStart);
     const progress = Math.max(0, Math.min(1, raw));
     timeline.style.setProperty('--progress', progress.toFixed(4));
 
@@ -645,18 +647,3 @@ if (window.matchMedia('(hover: hover)').matches) {
   startAuto();
 })();
 
-/* ─── PRICING CARD — 3D click flip ─── */
-document.querySelectorAll('.pricing-card').forEach(card => {
-  card.addEventListener('mousedown', e => {
-    const rect = card.getBoundingClientRect();
-    const side = e.clientX < rect.left + rect.width / 2 ? 'tilt-left' : 'tilt-right';
-    card.classList.add(side);
-    card.style.transform = '';
-
-    const cleanup = () => {
-      card.classList.remove('tilt-left', 'tilt-right');
-      document.removeEventListener('mouseup', cleanup);
-    };
-    document.addEventListener('mouseup', cleanup);
-  });
-});

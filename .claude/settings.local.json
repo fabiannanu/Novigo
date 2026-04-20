@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c \"from PIL import Image; print\\('ok'\\)\")",
+      "Bash(py -3 -c \"from PIL import Image; print\\('ok'\\)\")",
+      "Bash(py -3 -m pip install pillow -q)",
+      "Bash(py -3 -c ' *)",
+      "Bash(/c/Users/Fabian/AppData/Local/Microsoft/WindowsApps/python -c \"print\\('ok'\\)\")",
+      "Bash(node -e ' *)",
+      "mcp__plugin_claude-mem_mcp-search__get_observations",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}

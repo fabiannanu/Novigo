@@ -1267,13 +1267,13 @@ section[id] {
   gap: 0;
 }
 
-/* Rail: static track */
+/* Rail: static track — runs between bubble edges (center ±40px radius) */
 .process__timeline::before {
   content: '';
   position: absolute;
   left: 39px;
-  top: 40px;
-  bottom: 40px;
+  top: 80px;
+  bottom: 80px;
   width: 2px;
   background: rgba(124,107,255,0.12);
   border-radius: 2px;
@@ -1284,9 +1284,9 @@ section[id] {
   content: '';
   position: absolute;
   left: 39px;
-  top: 40px;
+  top: 80px;
   width: 2px;
-  height: calc((100% - 80px) * var(--progress, 0));
+  height: calc((100% - 160px) * var(--progress, 0));
   background: linear-gradient(to bottom, var(--accent-1), var(--accent-2));
   border-radius: 2px;
   box-shadow: 0 0 12px rgba(124,107,255,0.6), 0 0 24px rgba(197,106,255,0.35);
@@ -1487,7 +1487,7 @@ section[id] {
 }
 
 .tc__controls {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   gap: 20px;
@@ -1612,17 +1612,37 @@ section[id] {
   border-radius: var(--radius-xl);
   padding: 36px 32px;
   position: relative;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(.22,1,.36,1), box-shadow 0.4s ease, border-color 0.3s ease;
   display: flex;
   flex-direction: column;
-  perspective: 800px;
-  transform-style: preserve-3d;
   will-change: transform;
 }
 
 .pricing-card:hover {
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 20px 56px rgba(124, 107, 255, 0.18), 0 8px 24px rgba(0,0,0,0.4);
+  border-color: rgba(124,107,255,0.3);
+  transform: translateY(-6px);
 }
+
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    600px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(124, 107, 255, 0.18),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pricing-card:hover::before { opacity: 1; }
+.pricing-card > * { position: relative; z-index: 1; }
 
 .pricing-card .btn,
 .pricing-card .btn--premium {
@@ -1634,9 +1654,6 @@ section[id] {
   border-color: rgba(124,107,255,0.4);
 }
 
-/* 3D tilt on click */
-.pricing-card.tilt-left  { transform: perspective(800px) rotateY(-8deg) rotateX(3deg) scale(0.97); box-shadow: 20px 12px 48px rgba(0,0,0,0.55); }
-.pricing-card.tilt-right { transform: perspective(800px) rotateY(8deg)  rotateX(3deg) scale(0.97); box-shadow: -20px 12px 48px rgba(0,0,0,0.55); }
 
 .pricing-card__popular {
   position: absolute;
@@ -2277,10 +2294,16 @@ section[id] {
   padding: 20px 24px;
   border-top: 1px solid var(--border);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   font-size: 0.8125rem;
   color: var(--text-3);
+}
+
+.footer__novigo-brand {
+  color: var(--accent-1);
+  font-weight: 800;
+  letter-spacing: 0.05em;
 }
 
 /* ═══════════════════════════════════
