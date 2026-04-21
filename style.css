@@ -1294,32 +1294,34 @@ section[id] {
 .process-step:not(:last-child)::before {
   content: '';
   position: absolute;
-  left: 39px;
-  top: 120px;
-  height: calc(100% - 80px);
+  left: 50%;
+  top: 80px;
+  height: calc(100% - 40px);
   width: 2px;
   background: rgba(124,107,255,0.12);
   border-radius: 2px;
   z-index: 0;
+  transform: translateX(-1px);
 }
 
-/* Segment progress fill — lights up when this step is active */
+/* Segment progress fill — animates with scroll */
 .process-step:not(:last-child)::after {
   content: '';
   position: absolute;
-  left: 39px;
-  top: 120px;
+  left: 50%;
+  top: 80px;
   height: 0;
   width: 2px;
   background: linear-gradient(to bottom, var(--accent-1), var(--accent-2));
   border-radius: 2px;
   box-shadow: 0 0 12px rgba(124,107,255,0.6), 0 0 24px rgba(197,106,255,0.35);
-  transition: height 0.4s cubic-bezier(.22,1,.36,1);
-  z-index: 0;
+  z-index: 1;
+  transform: translateX(-1px);
 }
 
 .process-step.is-active:not(:last-child)::after {
-  height: calc(100% - 80px);
+  height: calc(100% - 40px);
+  transition: height 0.2s cubic-bezier(.22,1,.36,1);
 }
 
 .process-step {

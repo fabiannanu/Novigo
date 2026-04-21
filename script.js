@@ -286,7 +286,7 @@ filterBtns.forEach(btn => {
 
   const update = () => {
     const vh = window.innerHeight || document.documentElement.clientHeight;
-    const anchor = vh * 0.55;
+    const anchor = vh * 0.5;
 
     // Activate steps whose number circle the viewport anchor has reached
     steps.forEach(step => {
