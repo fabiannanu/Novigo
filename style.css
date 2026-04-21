@@ -2167,7 +2167,7 @@ section[id] {
 ═══════════════════════════════════ */
 .contact__grid {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
+  grid-template-columns: 0.8fr 1.6fr;
   gap: 80px;
   align-items: start;
 }
@@ -2611,7 +2611,7 @@ section[id] {
     gap: 48px;
   }
 
-  .about__visual { display: none; }
+  .about__visual { display: flex; }
 
   .contact__grid {
     grid-template-columns: 1fr;
@@ -2706,14 +2706,16 @@ section[id] {
   .process__timeline::after { display: none; }
 
   .process-step {
-    flex-direction: column;
+    flex-direction: row;
     gap: 16px;
+    align-items: flex-start;
   }
 
   .process-step__number {
-    width: 60px;
-    height: 60px;
-    font-size: 1.25rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+    flex-shrink: 0;
   }
 
   .process-step__content { padding-top: 0; }
