@@ -285,18 +285,10 @@ filterBtns.forEach(btn => {
   if (!steps.length) return;
 
   const update = () => {
-    const rect = timeline.getBoundingClientRect();
     const vh = window.innerHeight || document.documentElement.clientHeight;
     const anchor = vh * 0.55;
 
-    // Progress across the timeline's height, based on where the viewport anchor is
-    const trackStart = rect.top + 80;
-    const trackEnd   = rect.bottom - 80;
-    const raw = (anchor - trackStart) / (trackEnd - trackStart);
-    const progress = Math.max(0, Math.min(1, raw));
-    timeline.style.setProperty('--progress', progress.toFixed(4));
-
-    // Activate steps whose number circle the line has reached
+    // Activate steps whose number circle the viewport anchor has reached
     steps.forEach(step => {
       const num = step.querySelector('.process-step__number');
       if (!num) return;
