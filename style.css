@@ -1290,7 +1290,7 @@ section[id] {
 .process__timeline::before,
 .process__timeline::after { content: none; }
 
-/* Segment between this step's bubble and the next — static track */
+/* Segment between this step's bubble and the next — HIDDEN */
 .process-step:not(:last-child)::before {
   content: '';
   position: absolute;
@@ -1298,13 +1298,14 @@ section[id] {
   top: 40px;
   height: calc(100% - 40px);
   width: 2px;
-  background: rgba(124,107,255,0.12);
+  background: transparent;
   border-radius: 2px;
   z-index: 0;
   transform: translateX(-50%);
+  display: none;
 }
 
-/* Segment progress fill — smooth scroll-driven animation */
+/* Segment progress fill — HIDDEN */
 .process-step:not(:last-child)::after {
   content: '';
   position: absolute;
@@ -1312,12 +1313,13 @@ section[id] {
   top: 40px;
   height: calc((var(--progress, 0) * (100% - 40px)));
   width: 2px;
-  background: linear-gradient(to bottom, var(--accent-1), var(--accent-2));
+  background: transparent;
   border-radius: 2px;
-  box-shadow: 0 0 12px rgba(124,107,255,0.6), 0 0 24px rgba(197,106,255,0.35);
+  box-shadow: none;
   z-index: 1;
   transform: translateX(-50%);
   transition: height 0.1s ease-out;
+  display: none;
 }
 
 .process-step.is-active:not(:last-child)::after {
