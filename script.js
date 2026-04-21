@@ -286,16 +286,32 @@ filterBtns.forEach(btn => {
 
   const update = () => {
     const vh = window.innerHeight || document.documentElement.clientHeight;
-    const anchor = vh * 0.5;
+    const timelineRect = timeline.getBoundingClientRect();
+    const timelineTop = timelineRect.top + window.scrollY;
+    const timelineBottom = timelineTop + timelineRect.height;
+    const viewportCenter = window.scrollY + vh * 0.5;
 
-    // Activate steps whose number circle the viewport anchor has reached
-    steps.forEach(step => {
+    steps.forEach((step, idx) => {
       const num = step.querySelector('.process-step__number');
-      if (!num) return;
-      const numRect = num.getBoundingClientRect();
-      const numCenter = numRect.top + numRect.height / 2;
-      if (numCenter <= anchor) step.classList.add('is-active');
-      else step.classList.remove('is-active');
+      if (!idx) step.classList.add('is-active'); // Always show first step active
+
+      // Calculate progress for this step's line
+      const stepRect = step.getBoundingClientRect();
+      const stepTop = stepRect.top + window.scrollY;
+      const stepBottom = stepTop + stepRect.height;
+      const nextStepTop = idx < steps.length - 1 ? steps[idx + 1].getBoundingClientRect().top + window.scrollY : stepBottom;
+
+      // Smooth progress from when this step appears until next step reaches center
+      const progress = Math.max(0, Math.min(1, (viewportCenter - stepTop) / (nextStepTop - stepTop)));
+      step.style.setProperty('--progress', progress);
+
+      // Mark step active if it's past center
+      const numCenter = stepTop + 40;
+      if (numCenter <= viewportCenter) {
+        step.classList.add('is-active');
+      } else {
+        step.classList.remove('is-active');
+      }
     });
   };
 

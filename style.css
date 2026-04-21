@@ -1295,33 +1295,33 @@ section[id] {
   content: '';
   position: absolute;
   left: 50%;
-  top: 80px;
+  top: 40px;
   height: calc(100% - 40px);
   width: 2px;
   background: rgba(124,107,255,0.12);
   border-radius: 2px;
   z-index: 0;
-  transform: translateX(-1px);
+  transform: translateX(-50%);
 }
 
-/* Segment progress fill — animates with scroll */
+/* Segment progress fill — smooth scroll-driven animation */
 .process-step:not(:last-child)::after {
   content: '';
   position: absolute;
   left: 50%;
-  top: 80px;
-  height: 0;
+  top: 40px;
+  height: calc((var(--progress, 0) * (100% - 40px)));
   width: 2px;
   background: linear-gradient(to bottom, var(--accent-1), var(--accent-2));
   border-radius: 2px;
   box-shadow: 0 0 12px rgba(124,107,255,0.6), 0 0 24px rgba(197,106,255,0.35);
   z-index: 1;
-  transform: translateX(-1px);
+  transform: translateX(-50%);
+  transition: height 0.1s ease-out;
 }
 
 .process-step.is-active:not(:last-child)::after {
-  height: calc(100% - 40px);
-  transition: height 0.2s cubic-bezier(.22,1,.36,1);
+  --progress: 1;
 }
 
 .process-step {
