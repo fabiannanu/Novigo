@@ -1578,6 +1578,7 @@ section[id] {
 .tc__google-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 12px 22px;
   border-radius: 50px;
@@ -1586,9 +1587,14 @@ section[id] {
   color: var(--text-2);
   font-size: 0.875rem;
   font-weight: 500;
+  font-family: inherit;
+  line-height: 1;
   text-decoration: none;
   transition: var(--transition);
   letter-spacing: 0.01em;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .tc__google-btn:hover {

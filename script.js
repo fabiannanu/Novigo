@@ -494,6 +494,25 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 /* ─── ACTIVE NAV LINK on scroll ─── */
+const googleReviewsBtn = document.getElementById('googleReviewsBtn');
+
+if (googleReviewsBtn) {
+  const googleReviewsUrl = googleReviewsBtn.dataset.googleReviewsUrl;
+
+  const openGoogleReviews = event => {
+    if (!googleReviewsUrl) return;
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    window.location.href = googleReviewsUrl;
+  };
+
+  googleReviewsBtn.addEventListener('click', openGoogleReviews);
+  googleReviewsBtn.addEventListener('touchend', openGoogleReviews, { passive: false });
+  googleReviewsBtn.addEventListener('pointerup', openGoogleReviews);
+}
+
 const sections   = document.querySelectorAll('section[id]');
 const navAnchors = document.querySelectorAll('.nav__links--desktop a:not(.btn)');
 
