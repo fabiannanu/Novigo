@@ -494,6 +494,18 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 /* ─── ACTIVE NAV LINK on scroll ─── */
+const googleReviewsLink = document.getElementById('googleReviewsLink');
+
+if (googleReviewsLink) {
+  const googleReviewsUrl = googleReviewsLink.dataset.googleReviewsUrl;
+
+  googleReviewsLink.addEventListener('click', e => {
+    if (!googleReviewsUrl) return;
+    e.preventDefault();
+    window.location.assign(googleReviewsUrl);
+  });
+}
+
 const sections   = document.querySelectorAll('section[id]');
 const navAnchors = document.querySelectorAll('.nav__links--desktop a:not(.btn)');
 
@@ -654,4 +666,3 @@ if (window.matchMedia('(hover: hover)').matches) {
 
   startAuto();
 })();
-
