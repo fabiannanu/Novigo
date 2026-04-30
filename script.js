@@ -277,6 +277,74 @@ filterBtns.forEach(btn => {
   });
 });
 
+/* ─── PORTFOLIO CAROUSEL ─── */
+(function initPortfolioCarousel() {
+  const track    = document.getElementById('portfolioTrack');
+  const viewport = document.getElementById('portfolioViewport');
+  const prevBtn  = document.getElementById('portfolioPrev');
+  const nextBtn  = document.getElementById('portfolioNext');
+  const dots     = document.querySelectorAll('.portfolio__dot');
+  if (!track || !prevBtn || !nextBtn) return;
+
+  const items = track.querySelectorAll('.portfolio-item');
+  const total = items.length;
+  let current = 0;
+
+  function getVisible() {
+    return window.innerWidth <= 640 ? 1 : 2;
+  }
+
+  function maxIndex() {
+    return Math.max(0, total - getVisible());
+  }
+
+  function update(animate) {
+    const visible = getVisible();
+    const itemW   = viewport.offsetWidth / visible;
+    const offset  = current * (itemW + 28);
+    if (animate === false) {
+      track.style.transition = 'none';
+    } else {
+      track.style.transition = 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)';
+    }
+    track.style.transform = `translateX(-${offset}px)`;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current >= maxIndex();
+    dots.forEach((d, i) => d.classList.toggle('portfolio__dot--active', i === current));
+  }
+
+  prevBtn.addEventListener('click', () => {
+    if (current > 0) { current--; update(); }
+  });
+  nextBtn.addEventListener('click', () => {
+    if (current < maxIndex()) { current++; update(); }
+  });
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      current = Math.min(parseInt(dot.dataset.index, 10), maxIndex());
+      update();
+    });
+  });
+
+  let touchStartX = 0;
+  viewport.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  viewport.addEventListener('touchend', e => {
+    const dx = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 40) {
+      if (dx > 0 && current < maxIndex()) { current++; update(); }
+      else if (dx < 0 && current > 0)    { current--; update(); }
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    current = Math.min(current, maxIndex());
+    update(false);
+    requestAnimationFrame(() => update());
+  });
+
+  update(false);
+})();
+
 /* ─── PROCESS TIMELINE: scroll-driven connecting line ─── */
 (function initProcessTimeline() {
   const timeline = document.querySelector('.process__timeline');
